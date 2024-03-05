@@ -4,6 +4,7 @@ import com.example.cargo.entity.enums.OrderStatus;
 import jakarta.persistence.*;
 import lombok.Data;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 @Entity
@@ -15,7 +16,7 @@ public class OrdersEntity {
     private long id;
 
     @Temporal(TemporalType.TIMESTAMP)
-    private Date sendDate;
+    private LocalDate sendDate;
 
     @Temporal(TemporalType.TIMESTAMP)
     private Date deliveredDate;
@@ -29,12 +30,12 @@ public class OrdersEntity {
     private TransportEntity transportationType;
     @ManyToOne
     @JoinColumn(name = "id")
-    private UserEntity userId;
+    private UserEntity user;
     @OneToOne
     private PaymentEntity paymentID;
     @OneToOne
     @JoinColumn(name = "id")
-    private ProductEntity productId;
+    private ProductEntity product;
 
 
 }
