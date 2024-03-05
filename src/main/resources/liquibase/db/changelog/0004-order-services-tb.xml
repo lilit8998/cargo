@@ -4,7 +4,7 @@
 
     <changeSet id="0004-order-services-tb" author="lpoghosyan">
         <createTable tableName="services_order">
-            <column name="id" type="BIGINT" autoIncrement="true" >
+            <column name="id" type="BIGINT" autoIncrement="true">
                 <constraints primaryKey="true"/>
             </column>
             <column name="title" type="varchar(150)">
