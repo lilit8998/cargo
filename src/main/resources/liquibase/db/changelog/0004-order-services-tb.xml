@@ -10,7 +10,7 @@
             <column name="title" type="varchar(150)">
                 <constraints nullable="false"/>
             </column>
-            <column name="price" type="decimal(3,5)">
+            <column name="price" type="decimal(5,3)">
                 <constraints nullable="false"/>
             </column>
             <column name="order_id" type="BIGINT">
