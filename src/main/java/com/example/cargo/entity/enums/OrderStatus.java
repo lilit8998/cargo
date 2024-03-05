@@ -1,0 +1,7 @@
+package com.example.cargo.entity.enums;
+
+public enum OrderStatus {
+    NEW,
+    CANCELED,
+    DELIVERED
+}
