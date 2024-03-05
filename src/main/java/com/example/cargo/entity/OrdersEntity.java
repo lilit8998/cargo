@@ -19,7 +19,7 @@ public class OrdersEntity {
     private LocalDate sendDate;
 
     @Temporal(TemporalType.TIMESTAMP)
-    private Date deliveredDate;
+    private LocalDate deliveredDate;
 
     private double price;
 

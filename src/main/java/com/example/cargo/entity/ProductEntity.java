@@ -3,6 +3,7 @@ package com.example.cargo.entity;
 import jakarta.persistence.*;
 import lombok.Data;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 @Entity
@@ -16,7 +17,7 @@ public class ProductEntity {
     private String details;
     private long receivedId;
     @Temporal(TemporalType.TIMESTAMP)
-    private Date orderDate;
+    private LocalDate orderDate;
 
     @OneToOne
     @JoinColumn(name = "size_id")
