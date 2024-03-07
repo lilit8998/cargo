@@ -9,13 +9,13 @@
             <column name="id" type="int">
                 <constraints primaryKey="true"/>
             </column>
-            <column name="name" type="varchar">
+            <column name="name" type="varchar(150)">
                 <constraints nullable="false"/>
             </column>
-            <column name="email" type="varchar">
+            <column name="email" type="varchar(150)">
                 <constraints nullable="false"/>
             </column>
-            <column name="subject" type="varchar">
+            <column name="subject" type="varchar(160)">
                 <constraints nullable="false"/>
             </column>
             <column name="text" type="text">

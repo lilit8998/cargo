@@ -9,13 +9,18 @@
             <column name="id" type="int" autoIncrement="true">
                 <constraints primaryKey="true"/>
             </column>
-            <column name="name" type="varchar">
+            <column name="name" type="varchar(255)">
                 <constraints nullable="false"/>
             </column>
-            <column name="countryId" type="int">
+            <column name="country_id" type="int">
                 <constraints nullable="false"/>
             </column>
         </createTable>
+        <addForeignKeyConstraint baseTableName="city"
+                                 baseColumnNames="country_id"
+                                 constraintName="city_country"
+                                 referencedTableName="country"
+                                 referencedColumnNames="id"/>
     </changeSet>
 
 

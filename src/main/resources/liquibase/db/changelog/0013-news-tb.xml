@@ -9,10 +9,10 @@
             <column name="id" type="int">
                 <constraints primaryKey="true"/>
             </column>
-            <column name="title" type="varchar">
+            <column name="title" type="varchar(255)">
                 <constraints nullable="false"/>
             </column>
-            <column name="description" type="varchar">
+            <column name="description" type="text">
                 <constraints nullable="false"/>
             </column>
             <column name="publish_Date" type="date">
