@@ -1,0 +1,46 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+
+    <changeSet id="0006-create-users-table" author="kgrigoryan">
+        <createTable tableName="user">
+            <column name="id" type="int" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="first_name" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="last_name" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="is_active" type="tinyint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="password" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="email" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="phone_number" type="varchar(255)"/>
+            <column name="DOB" type="date">
+                <constraints nullable="false"/>
+            </column>
+            <column name="role" type="enum('USER','ADMIN')">
+                <constraints nullable="false"/>
+            </column>
+            <column name="product_id" type="int">
+                <constraints nullable="true"/>
+            </column>
+            <column name="payment_id" type="int">
+                <constraints nullable="true"/>
+            </column>
+        </createTable>
+
+    </changeSet>
+    <changeSet id="add-foreign-keys-to-user" author="kgrigoryan">
+        <addForeignKeyConstraint baseTableName="users" baseColumnNames="product_id"
+                                 referencedTableName="users" referencedColumnNames="id"
+                                 constraintName="fk_users_product_id"/>
+    </changeSet>
+</databaseChangeLog>

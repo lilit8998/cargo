@@ -1,0 +1,28 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+
+    <changeSet id="0009-create-branch-table" author="kgrigoryan">
+        <createTable tableName="branch">
+            <column name="id" type="int" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="country_id" type="int"/>
+            <column name="city_id" type="int"/>
+            <column name="street" type="varchar(255)"/>
+            <column name="order_id" type="int"/>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="add-foreign-keys-to-branch" author="kgrigoryan">
+        <addForeignKeyConstraint baseTableName="branch" baseColumnNames="country_id"
+                                 referencedTableName="country" referencedColumnNames="id"
+                                 constraintName="fk_branch_country_id"/>
+        <addForeignKeyConstraint baseTableName="branch" baseColumnNames="city_id"
+                                 referencedTableName="city" referencedColumnNames="id"
+                                 constraintName="fk_branch_city_id"/>
+        <addForeignKeyConstraint baseTableName="branch" baseColumnNames="order_id"
+                                 referencedTableName="orders" referencedColumnNames="id"
+                                 constraintName="fk_branch_order_id"/>
+    </changeSet>
+</databaseChangeLog>
