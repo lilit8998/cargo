@@ -2,9 +2,9 @@ package com.example.cargo.entity;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import org.apache.catalina.User;
 
 import java.time.LocalDate;
-import java.util.Date;
 
 @Entity
 @Table(name = "product")
@@ -15,7 +15,9 @@ public class ProductEntity {
     private long id;
 
     private String details;
-    private long receivedId;
+
+    @ManyToOne
+    private User createdBy;
     @Temporal(TemporalType.TIMESTAMP)
     private LocalDate orderDate;
 
