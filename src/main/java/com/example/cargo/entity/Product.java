@@ -9,7 +9,7 @@ import java.time.LocalDate;
 @Entity
 @Table(name = "product")
 @Data
-public class ProductEntity {
+public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
@@ -23,5 +23,5 @@ public class ProductEntity {
 
     @OneToOne
     @JoinColumn(name = "size_id")
-    private SizeEntity sizeId;
+    private Size sizeId;
 }

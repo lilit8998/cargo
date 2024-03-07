@@ -6,7 +6,7 @@ import lombok.Data;
 @Entity
 @Table(name = "services_order")
 @Data
-public class ServiceOrderEntity {
+public class ServiceOrder {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
@@ -15,5 +15,5 @@ public class ServiceOrderEntity {
     private double price;
     @OneToOne
     @JoinColumn(name = "id")
-    private OrdersEntity orderId;
+    private Orders orderId;
 }

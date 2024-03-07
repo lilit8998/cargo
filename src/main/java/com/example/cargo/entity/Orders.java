@@ -5,12 +5,11 @@ import jakarta.persistence.*;
 import lombok.Data;
 
 import java.time.LocalDate;
-import java.util.Date;
 
 @Entity
 @Table(name = "orders")
 @Data
-public class OrdersEntity {
+public class Orders {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
@@ -25,17 +24,17 @@ public class OrdersEntity {
 
     private OrderStatus orderStatus;
     private String orderLocation;
+   // @OneToOne
+//    @JoinColumn(name = "id")
+//    private TransportEntity transportationType;
+//    @ManyToOne
+//    @JoinColumn(name = "id")
+//    private UserEntity user;
+//    @OneToOne
+//    private PaymentEntity payment;
     @OneToOne
     @JoinColumn(name = "id")
-    private TransportEntity transportationType;
-    @ManyToOne
-    @JoinColumn(name = "id")
-    private UserEntity user;
-    @OneToOne
-    private PaymentEntity paymentID;
-    @OneToOne
-    @JoinColumn(name = "id")
-    private ProductEntity product;
+    private Product product;
 
 
 }
