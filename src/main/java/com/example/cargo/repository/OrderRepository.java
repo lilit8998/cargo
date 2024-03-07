@@ -1,5 +1,6 @@
 package com.example.cargo.repository;
 
+import com.example.cargo.entity.OrdersEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
