@@ -26,12 +26,12 @@ public class Orders {
     private String orderLocation;
    // @OneToOne
 //    @JoinColumn(name = "id")
-//    private TransportEntity transportationType;
+//    private Transport transportationType;
 //    @ManyToOne
 //    @JoinColumn(name = "id")
-//    private UserEntity user;
+//    private User user;
 //    @OneToOne
-//    private PaymentEntity payment;
+//    private Payment payment;
     @OneToOne
     @JoinColumn(name = "id")
     private Product product;

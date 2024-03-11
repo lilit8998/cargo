@@ -15,5 +15,5 @@ public class ServiceOrder {
     private double price;
     @OneToOne
     @JoinColumn(name = "id")
-    private Orders orderId;
+    private Orders order;
 }

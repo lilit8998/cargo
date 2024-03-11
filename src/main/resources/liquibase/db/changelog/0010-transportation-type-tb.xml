@@ -12,7 +12,7 @@
             <column name="end_date" type="date">
                 <constraints nullable="false"/>
             </column>
-            <column name="from_where" type="varchar(255)">
+            <column name="from" type="varchar(255)">
                 <constraints nullable="false"/>
             </column>
             <column name="to" type="varchar(255)">

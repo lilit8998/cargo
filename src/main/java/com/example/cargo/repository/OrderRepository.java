@@ -8,6 +8,6 @@ import org.springframework.stereotype.Repository;
 import java.util.Optional;
 
 @Repository
-public interface OrderRepository extends JpaRepository<Orders,Integer> {
-    Optional<Orders> findByProduct(Product productEntity);
+public interface OrderRepository extends JpaRepository<Orders,Long> {
+   Optional<Product> findByProduct(Product productEntity);
 }

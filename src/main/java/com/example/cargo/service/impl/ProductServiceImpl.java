@@ -5,8 +5,10 @@ import com.example.cargo.repository.ProductRepository;
 import com.example.cargo.service.ProductService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -24,8 +26,9 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public Product findProductById(int id) {
-        return productRepository.findById(id).orElse(null);
+    @Transactional
+    public Optional<Product> findProductById(int id) {
+        return productRepository.findById(id);
     }
 
     @Override

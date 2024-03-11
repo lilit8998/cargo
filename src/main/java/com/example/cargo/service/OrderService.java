@@ -1,22 +1,25 @@
 package com.example.cargo.service;
 
+import com.example.cargo.dto.OrderResponseDto;
+import com.example.cargo.dto.SaveOrderDto;
 import com.example.cargo.entity.Orders;
 import com.example.cargo.entity.Product;
 
 import java.util.List;
+import java.util.Optional;
 
 
 public interface OrderService {
 
-    Orders save(Orders ordersEntity);
+    OrderResponseDto save(SaveOrderDto ordersEntity);
 
-    List<Orders> findAll(Orders ordersEntity);
+    List<OrderResponseDto> getAll(Orders ordersEntity);
 
-    Orders findByProduct(Product productEntity);
+    Optional<Product> getByProduct(Product productEntity);
 
-    Orders findProductById(int id);
+    OrderResponseDto findProductById(Long id);
 
-    void deleteById(int id);
+    void deleteById(Long id);
 
-    //List<OrdersEntity>findByBranch(BranchEntity branchEntity);
+    //List<Orders>findByBranch(BranchEntity branchEntity);
 }

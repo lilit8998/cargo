@@ -1,40 +1,60 @@
 package com.example.cargo.service.impl;
 
+import com.example.cargo.dto.OrderResponseDto;
+import com.example.cargo.dto.SaveOrderDto;
 import com.example.cargo.entity.Orders;
 import com.example.cargo.entity.Product;
+import com.example.cargo.mapper.OrderMapper;
 import com.example.cargo.repository.OrderRepository;
 import com.example.cargo.service.OrderService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
 public class OrderServiceImpl implements OrderService {
     private final OrderRepository orderRepository;
+    private final OrderMapper orderMapper;
+
     @Override
-    public Orders save(Orders ordersEntity) {
-        return orderRepository.save(ordersEntity);
+    public OrderResponseDto save(SaveOrderDto saveOrderDto) {
+        Orders orders = orderMapper.map(saveOrderDto);
+        return orderMapper.map(orderRepository.save(
+                orderMapper.map(saveOrderDto))
+        );
     }
 
     @Override
-    public List<Orders> findAll(Orders ordersEntity) {
-        return orderRepository.findAll();
+    public List<OrderResponseDto> getAll(Orders ordersEntity) {
+        List<Orders> all = orderRepository.findAll();
+        List<OrderResponseDto> orderResponseDto = new ArrayList<>();
+        for (Orders orders : all) {
+            orderResponseDto.add(orderMapper.map(orders));
+        }
+        return orderResponseDto;
     }
 
     @Override
-    public Orders findByProduct(Product productEntity) {
-        return orderRepository.findByProduct(productEntity).orElse(null);
+    public Optional<Product> getByProduct(Product productEntity) {
+        return orderRepository.findByProduct(productEntity);
+    }
+
+    @Transactional
+    public OrderResponseDto findProductById(Long id) {
+        Orders orders = orderRepository.findById(id).orElse(null);
+        if (orders == null){
+            return null;
+        }
+        return orderMapper.map(orders);
     }
 
     @Override
-    public Orders findProductById(int id) {
-        return orderRepository.findById(id).orElse(null);
-    }
-
-    @Override
-    public void deleteById(int id) {
+    public void deleteById(Long id) {
         orderRepository.deleteById(id);
     }
 

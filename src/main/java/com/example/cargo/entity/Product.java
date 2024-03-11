@@ -23,5 +23,5 @@ public class Product {
 
     @OneToOne
     @JoinColumn(name = "size_id")
-    private Size sizeId;
+    private Size size;
 }
