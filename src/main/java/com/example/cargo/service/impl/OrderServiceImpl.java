@@ -13,7 +13,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -30,7 +29,7 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public List<OrderResponseDto> getAll(Orders ordersEntity) {
+    public List<OrderResponseDto> getAll() {
         List<Orders> all = orderRepository.findAll();
         List<OrderResponseDto> orderResponseDto = new ArrayList<>();
         for (Orders orders : all) {
@@ -39,13 +38,13 @@ public class OrderServiceImpl implements OrderService {
         return orderResponseDto;
     }
 
-    @Override
-    public Optional<Product> getByProduct(Product productEntity) {
-        return orderRepository.findByProduct(productEntity);
+    public Product getByProduct(Long productId) {
+        return orderRepository.findByProduct(productId).orElse(null);
     }
 
+
     @Transactional
-    public OrderResponseDto findProductById(Long id) {
+    public OrderResponseDto findOrdersById(Long id) {
         Orders orders = orderRepository.findById(id).orElse(null);
         if (orders == null){
             return null;
