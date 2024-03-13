@@ -41,13 +41,11 @@ public class OrderServiceImpl implements OrderService {
         return orderResponseDto;
     }
 
-    @Transactional(propagation = Propagation.REQUIRED, isolation = Isolation.SERIALIZABLE,readOnly = true)
     public Product getByProduct(Long productId) {
         return orderRepository.findByProduct(productId).orElse(null);
     }
 
 
-    @Transactional(propagation = Propagation.REQUIRED, isolation = Isolation.SERIALIZABLE,readOnly = true)
     public OrderResponseDto findOrdersById(Long id) {
         Orders orders = orderRepository.findById(id).orElse(null);
         if (orders == null) {

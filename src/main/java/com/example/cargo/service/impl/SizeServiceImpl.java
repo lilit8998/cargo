@@ -23,7 +23,6 @@ public class SizeServiceImpl implements SizeService {
     }
 
     @Override
-    @Transactional(propagation = Propagation.REQUIRED,isolation = Isolation.SERIALIZABLE,readOnly = true)
     public Optional<Size> findById(int id) {
         return sizeEntityRepository.findById(id);
     }

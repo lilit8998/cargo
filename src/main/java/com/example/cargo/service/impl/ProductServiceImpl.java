@@ -29,7 +29,6 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    @Transactional(propagation = Propagation.REQUIRED,isolation = Isolation.SERIALIZABLE,readOnly = true)
     public Optional<Product> findProductById(int id) {
         return productRepository.findById(id);
     }
