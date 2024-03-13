@@ -9,6 +9,8 @@ import com.example.cargo.repository.OrderRepository;
 import com.example.cargo.service.OrderService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Isolation;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
@@ -21,6 +23,7 @@ public class OrderServiceImpl implements OrderService {
     private final OrderMapper orderMapper;
 
     @Override
+    @Transactional(propagation = Propagation.REQUIRED, isolation = Isolation.SERIALIZABLE)
     public OrderResponseDto save(SaveOrderDto saveOrderDto) {
         Orders orders = orderMapper.map(saveOrderDto);
         return orderMapper.map(orderRepository.save(
@@ -38,21 +41,23 @@ public class OrderServiceImpl implements OrderService {
         return orderResponseDto;
     }
 
+    @Transactional(propagation = Propagation.REQUIRED, isolation = Isolation.SERIALIZABLE)
     public Product getByProduct(Long productId) {
         return orderRepository.findByProduct(productId).orElse(null);
     }
 
 
-    @Transactional
+    @Transactional(propagation = Propagation.REQUIRED, isolation = Isolation.SERIALIZABLE)
     public OrderResponseDto findOrdersById(Long id) {
         Orders orders = orderRepository.findById(id).orElse(null);
-        if (orders == null){
+        if (orders == null) {
             return null;
         }
         return orderMapper.map(orders);
     }
 
     @Override
+    @Transactional(propagation = Propagation.REQUIRED, isolation = Isolation.SERIALIZABLE)
     public void deleteById(Long id) {
         orderRepository.deleteById(id);
     }
