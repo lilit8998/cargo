@@ -22,7 +22,7 @@ public class OtherServiceImpl implements OtherServiceService {
     }
 
     @Override
-    @Transactional(propagation = Propagation.REQUIRED,isolation = Isolation.SERIALIZABLE)
+    @Transactional(propagation = Propagation.REQUIRED,isolation = Isolation.SERIALIZABLE,readOnly = true)
     public Optional<ServiceOrder> findProductById(int id) {
         return serviceOrderRepository.findById(id);
     }
