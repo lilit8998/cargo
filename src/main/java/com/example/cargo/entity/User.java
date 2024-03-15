@@ -2,6 +2,7 @@ package com.example.cargo.entity;
 
 import com.example.cargo.entity.enums.UserRole;
 import jakarta.persistence.*;
+import jdk.jfr.Relational;
 import lombok.Data;
 
 import java.util.Date;
@@ -29,6 +30,7 @@ public class User {
 
     private Date dob;
 
+    @ManyToOne
     private ProductEntity productId;
 
     @OneToOne
