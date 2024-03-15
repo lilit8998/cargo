@@ -1,6 +1,5 @@
 package com.example.cargo.entity;
 
-
 import jakarta.persistence.*;
 import lombok.Data;
 

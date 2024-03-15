@@ -13,6 +13,7 @@ public class ServiceOrderEntity {
 
     private String title;
     private double price;
+
     @OneToOne
     @JoinColumn(name = "id")
     private OrdersEntity orderId;
