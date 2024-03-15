@@ -28,10 +28,10 @@
                 <constraints nullable="false"/>
             </column>
         </createTable>
-        <addForeignKeyConstraint baseTableName="review"
-                                 baseColumnNames="user_id"
-                                 constraintName="user_review"
-                                 referencedTableName="users"
+        <addForeignKeyConstraint baseTableName="transportation_type"
+                                 baseColumnNames="id"
+                                 constraintName="order_transportation_type"
+                                 referencedTableName="orders"
                                  referencedColumnNames="id"/>
 
     </changeSet>
