@@ -19,7 +19,7 @@ public class User {
 
     private String surname;
 
-    private int isActive;
+    private boolean isActive;
 
     private String password;
 
@@ -29,10 +29,10 @@ public class User {
 
     private Date dob;
 
-    private int productId;
+    private ProductEntity productId;
 
     @OneToOne
-    private int payment;
+    private Payment payment;
 
     @Enumerated(EnumType.STRING)
     private UserRole userRole;
