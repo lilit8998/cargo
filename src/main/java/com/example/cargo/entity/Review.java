@@ -3,18 +3,17 @@ package com.example.cargo.entity;
 import jakarta.persistence.*;
 import lombok.Data;
 
-import java.time.LocalDate;
-
 @Entity
-@Table(name = "news")
+@Table(name = "review")
 @Data
-public class News {
+public class Review {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
-    private String title;
+    private long id;
     private String description;
-    private LocalDate publishDate;
+
+    @OneToOne
+    private User user;
 
 }

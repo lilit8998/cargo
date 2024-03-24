@@ -4,17 +4,22 @@ import jakarta.persistence.*;
 import lombok.Data;
 
 @Entity
-@Table(name = "services_order")
+@Table(name = "branch")
 @Data
-public class ServiceOrder {
+public class Branch {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    private String title;
-    private double price;
+    @OneToOne
+    private Country country;
 
     @OneToOne
-    @JoinColumn(name = "id")
-    private Orders order;
+    private City city;
+
+    private String street;
+
+    @ManyToOne
+    private OrdersEntity orders;
 }

@@ -19,7 +19,7 @@ public class City {
     private long id;
     private String name;
 
-    @ManyToOne
+    @OneToMany
     private Country country;
 
 }
