@@ -9,7 +9,7 @@ import java.time.LocalDate;
 @Entity
 @Table(name = "orders")
 @Data
-public class OrdersEntity {
+public class Orders {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
@@ -24,17 +24,17 @@ public class OrdersEntity {
 
     private OrderStatus orderStatus;
     private String orderLocation;
+   // @OneToOne
+//    @JoinColumn(name = "id")
+//    private Transport transportationType;
+//    @ManyToOne
+//    @JoinColumn(name = "id")
+//    private User user;
+//    @OneToOne
+//    private Payment payment;
     @OneToOne
     @JoinColumn(name = "id")
-    private TransportEntity transportationType;
-    @ManyToOne
-    @JoinColumn(name = "id")
-    private UserEntity user;
-    @OneToOne
-    private PaymentEntity paymentID;
-    @OneToOne
-    @JoinColumn(name = "id")
-    private ProductEntity product;
+    private Product product;
 
 
 }
