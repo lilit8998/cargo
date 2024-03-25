@@ -26,8 +26,7 @@ public class OrderServiceImpl implements OrderService {
     @Transactional(propagation = Propagation.REQUIRED, isolation = Isolation.SERIALIZABLE)
     public OrderResponseDto save(SaveOrderDto saveOrderDto) {
         Orders orders = orderMapper.map(saveOrderDto);
-        return orderMapper.map(orderRepository.save(
-                orderMapper.map(saveOrderDto))
+        return orderMapper.map(orderRepository.save(orders)
         );
     }
 
@@ -42,7 +41,7 @@ public class OrderServiceImpl implements OrderService {
     }
 
     public Product getByProduct(Long productId) {
-        return orderRepository.findByProduct(productId).orElse(null);
+        return orderRepository.findByProductId(productId).orElse(null);
     }
 
 

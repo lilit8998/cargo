@@ -9,12 +9,11 @@ import lombok.Data;
 public class ServiceOrder {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
 
     private String title;
     private double price;
 
     @OneToOne
-    @JoinColumn(name = "id")
-    private Orders order;
+    private Orders orderId;
 }

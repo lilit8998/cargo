@@ -14,27 +14,30 @@ public class Orders {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @Temporal(TemporalType.TIMESTAMP)
+//    @Temporal(TemporalType.TIMESTAMP)
     private LocalDate sendDate;
 
-    @Temporal(TemporalType.TIMESTAMP)
+//    @Temporal(TemporalType.TIMESTAMP)
     private LocalDate deliveredDate;
 
     private double price;
 
     private OrderStatus orderStatus;
     private String orderLocation;
-   // @OneToOne
-//    @JoinColumn(name = "id")
-//    private Transport transportationType;
-//    @ManyToOne
-//    @JoinColumn(name = "id")
-//    private User user;
-//    @OneToOne
-//    private Payment payment;
     @OneToOne
-    @JoinColumn(name = "id")
+    @JoinColumn(name = "transportId", referencedColumnName = "id")
+    private Transport transportId;
+    @ManyToOne
+    @JoinColumn(name = "userId", referencedColumnName = "id")
+    private User userId;
+    @OneToOne
+    private Payment payment;
+
+    @OneToOne
+    @JoinColumn(name = "product_id" , referencedColumnName = "id")
     private Product product;
+
+
 
 
 }

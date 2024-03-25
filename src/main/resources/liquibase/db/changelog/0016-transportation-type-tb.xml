@@ -24,9 +24,6 @@
             <column name="drive_type" type="enum('AIR','OCEAN')">
                 <constraints nullable="false"/>
             </column>
-            <column name="user_id" type="BIGINT">
-                <constraints nullable="false"/>
-            </column>
         </createTable>
         <addForeignKeyConstraint baseTableName="transportation_type"
                                  baseColumnNames="id"

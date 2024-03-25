@@ -1,7 +1,7 @@
 <databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
                    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
                    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
-    <changeSet id="0009-branch-tb" author="lpoghosyan">
+    <changeSet id="0012-branch-tb" author="lpoghosyan">
         <createTable tableName="branch">
             <column name="id" type="BIGINT" autoIncrement="true">
                 <constraints primaryKey="true"/>
@@ -9,10 +9,10 @@
             <column name="street" type="varchar(255)">
                 <constraints nullable="false"/>
             </column>
-            <column name="country_id" type="int">
+            <column name="country_id" type="bigint">
                 <constraints nullable="false"/>
             </column>
-            <column name="city_id" type="int">
+            <column name="city_id" type="bigint">
                 <constraints nullable="false"/>
             </column>
             <column name="order_id" type="BIGINT">

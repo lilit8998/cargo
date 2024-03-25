@@ -1,6 +1,9 @@
 package com.example.cargo.dto;
 
+import com.example.cargo.entity.Payment;
 import com.example.cargo.entity.Product;
+import com.example.cargo.entity.Transport;
+import com.example.cargo.entity.User;
 import com.example.cargo.entity.enums.OrderStatus;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -19,9 +22,9 @@ public class OrderResponseDto {
     private LocalDate deliveredDate;
     private OrderStatus orderStatus;
     private String orderLocation;
-//    private Transport transportType; // because the entity doesn't exist now
- //   private User user; // it's too
-  //  private Payment payment; // it's too
+    private Transport transportType;
+    private User user;
+    private Payment payment;
     private Product product;
 
 }

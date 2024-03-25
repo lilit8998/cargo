@@ -14,7 +14,7 @@ public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
 
     private String name;
 
@@ -31,7 +31,7 @@ public class User {
     private Date dob;
 
     @ManyToOne
-    private ProductEntity productId;
+    private Product productId;
 
     @OneToOne
     private Payment payment;
