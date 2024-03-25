@@ -6,7 +6,7 @@ spring:
     password: root
   jpa:
     hibernate:
-      ddl-auto: update
+      ddl-auto: none
 
   liquibase:
     change-log: classpath:liquibase/db/change-log.xml

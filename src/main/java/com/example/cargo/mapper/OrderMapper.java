@@ -9,12 +9,12 @@ import org.mapstruct.NullValuePropertyMappingStrategy;
 
 import java.time.LocalDate;
 
-@Mapper(componentModel = "spring", nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE
-,uses = LocalDate.class)
+@Mapper(componentModel = "spring", nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE,
+        imports = LocalDate.class)
 public interface OrderMapper {
     OrderResponseDto map(Orders orders);
 
-    @Mapping(target = "sendDate", source = "deliveredDate", expression = "java(java.time.localDate.now()")
+    @Mapping(target = "sendDate", expression = "java(LocalDate.now())")
     Orders map(SaveOrderDto orderDto);
 
 }

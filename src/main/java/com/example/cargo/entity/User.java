@@ -2,13 +2,12 @@ package com.example.cargo.entity;
 
 import com.example.cargo.entity.enums.UserRole;
 import jakarta.persistence.*;
-import jdk.jfr.Relational;
 import lombok.Data;
 
 import java.util.Date;
 
 @Entity
-@Table(name = "user")
+@Table(name = "users")
 @Data
 public class User {
 
