@@ -21,5 +21,5 @@ public class Branch {
     private String street;
 
     @ManyToOne
-    private OrdersEntity orders;
+    private Orders orders;
 }

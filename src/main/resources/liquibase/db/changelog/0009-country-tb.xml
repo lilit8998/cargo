@@ -4,23 +4,15 @@
                    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
                    https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
 
-    <changeSet id="0012-city-tb" author="vvirabyan">
-        <createTable tableName="city">
-            <column name="id" type="int" autoIncrement="true">
+    <changeSet id="0009-country-tb" author="vvirabyan">
+        <createTable tableName="country">
+            <column name="id" type="bigint" autoIncrement="true">
                 <constraints primaryKey="true"/>
             </column>
             <column name="name" type="varchar(255)">
                 <constraints nullable="false"/>
             </column>
-            <column name="country_id" type="int">
-                <constraints nullable="false"/>
-            </column>
         </createTable>
-        <addForeignKeyConstraint baseTableName="city"
-                                 baseColumnNames="country_id"
-                                 constraintName="city_country"
-                                 referencedTableName="country"
-                                 referencedColumnNames="id"/>
     </changeSet>
 
 

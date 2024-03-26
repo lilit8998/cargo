@@ -16,10 +16,10 @@ public class Payment {
     private String cvc;
 
     @OneToOne
-    @JoinColumn(name = "user", referencedColumnName = "userId")
+    @JoinColumn(name = "user", referencedColumnName = "id")
     private User user;
 
     @OneToOne
-    @JoinColumn(name = "orders", referencedColumnName = "ordersId")
-    private OrdersEntity orders;
+    @JoinColumn(name = "orders", referencedColumnName = "id")
+    private Orders orders;
 }

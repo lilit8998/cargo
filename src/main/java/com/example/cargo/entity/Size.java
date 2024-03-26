@@ -10,7 +10,7 @@ import lombok.Data;
 public class Size {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
 
     private int width;
     private int height;

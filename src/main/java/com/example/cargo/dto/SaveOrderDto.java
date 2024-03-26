@@ -1,6 +1,8 @@
 package com.example.cargo.dto;
 
 import com.example.cargo.entity.Product;
+import com.example.cargo.entity.Transport;
+import com.example.cargo.entity.User;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -16,8 +18,8 @@ public class SaveOrderDto {
     private LocalDate deliveredDate;
     private double price;
     private String orderLocation;
-//    private TransportationType transportationType; // I don't know will be is it correct here or not
-   // private User user; // it's too
+    private Transport transportationType;
+    private User user;
     private Product product;
 
 }

@@ -16,10 +16,10 @@ public class City {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
     private String name;
 
-    @OneToMany
+    @ManyToOne
     private Country country;
 
 }
