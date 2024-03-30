@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.Data;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "product")
@@ -18,8 +19,8 @@ public class Product {
     @ManyToOne
     private User createdBy;
 
-//    @Temporal(TemporalType.TIMESTAMP)
-    private LocalDate orderDate;
+    @Temporal(TemporalType.TIMESTAMP)
+    private LocalDateTime orderDate;
 
     @OneToOne
     @JoinColumn(name = "size_id")

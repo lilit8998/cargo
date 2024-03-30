@@ -13,31 +13,39 @@
                 <constraints nullable="false"/>
             </column>
             <column name="phone" type="varchar(255)">
-                <constraints nullable="false"/>
+                <constraints nullable="false" unique="true"/>
             </column>
             <column name="email" type="varchar(255)">
+                <constraints nullable="false" unique="true"/>
+            </column>
+            <column name="password" type="varchar(255)">
                 <constraints nullable="false"/>
             </column>
-            <column name="DOB" type="Date">
+            <column name="dob" type="date">
                 <constraints nullable="false"/>
             </column>
-            <column name="isActive" type="boolean">
-                <constraints nullable="false"/>
+            <column name="is_active" type="boolean" defaultValue="false">
+                <constraints nullable="true"/>
             </column>
-            <column name="role" type="enum('USER','ADMIN')">
-                <constraints nullable="false"/>
-            </column>
-            <column name="product_id" type="BIGINT">
-                <constraints nullable="false"/>
-            </column>
+            <column name="role" type="enum('USER','ADMIN')" defaultValue="USER"/>
+            <column name="product_id" type="BIGINT"/>
+
+            <column name="payment_id" type="BIGINT"/>
+
         </createTable>
         <addForeignKeyConstraint baseTableName="users"
                                  baseColumnNames="product_id"
                                  constraintName="user_product"
                                  referencedTableName="product"
-                                 referencedColumnNames="id"/>
+                                 referencedColumnNames="id"
+                                 onDelete="CASCADE"/>
+        <addForeignKeyConstraint baseTableName="users"
+                                 baseColumnNames="payment_id"
+                                 constraintName="user_payment"
+                                 referencedTableName="payment"
+                                 referencedColumnNames="id"
+                                 onDelete="CASCADE"/>
+
+
     </changeSet>
-
-
-
 </databaseChangeLog>

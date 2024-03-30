@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import lombok.Data;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "orders")
@@ -14,11 +15,11 @@ public class Orders {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-//    @Temporal(TemporalType.TIMESTAMP)
-    private LocalDate sendDate;
+    @Temporal(TemporalType.TIMESTAMP)
+    private LocalDateTime sendDate;
 
-//    @Temporal(TemporalType.TIMESTAMP)
-    private LocalDate deliveredDate;
+    @Temporal(TemporalType.TIMESTAMP)
+    private LocalDateTime deliveredDate;
 
     private double price;
 
@@ -27,6 +28,7 @@ public class Orders {
     @OneToOne
     @JoinColumn(name = "transportId", referencedColumnName = "id")
     private Transport transportId;
+
     @ManyToOne
     @JoinColumn(name = "userId", referencedColumnName = "id")
     private User userId;
@@ -34,10 +36,8 @@ public class Orders {
     private Payment payment;
 
     @OneToOne
-    @JoinColumn(name = "product_id" , referencedColumnName = "id")
+    @JoinColumn(name = "product_id", referencedColumnName = "id")
     private Product product;
-
-
 
 
 }

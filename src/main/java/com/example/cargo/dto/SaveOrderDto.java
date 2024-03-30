@@ -8,14 +8,15 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 public class SaveOrderDto {
 
-    private LocalDate sendDate;
-    private LocalDate deliveredDate;
+    private LocalDateTime sendDate;
+    private LocalDateTime deliveredDate;
     private double price;
     private String orderLocation;
     private Transport transportationType;
