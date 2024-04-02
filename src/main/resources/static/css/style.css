@@ -558,7 +558,7 @@ MAINMENU
 	.blog-read {
 	margin-bottom: 20px;
 	list-style: none;
-	background: url(../img/dotwhite50.png);
+	background: url(/static/img/dotwhite50.png);
 	line-height: 1.7em;
 	padding-bottom: 40px;
 	}
@@ -566,21 +566,21 @@ MAINMENU
 	.blog-header .by {
 	display: inline-block;
 	float: left;
-	background: url(../img/icon-user.png) left center no-repeat;
+	background: url(/static/img/icon-user.png) left center no-repeat;
 	padding-left: 24px;
 	}
 
 	.blog-header .cat {
 	display: inline-block;
 	float: left;
-	background: url(../img/icon-folder.png) left center no-repeat;
+	background: url(/static/img/icon-folder.png) left center no-repeat;
 	padding-left: 24px;
 	}
 
 	.blog-header .news-date {
 	display: inline-block;
 	float: left;
-	background: url(../img/icon-folder.png) left center no-repeat;
+	background: url(/static/img/icon-folder.png) left center no-repeat;
 	padding-left: 24px;
 	}
 	/* blog list */
@@ -619,11 +619,11 @@ MAINMENU
 	display: block;
 	width: 60px;
 	height: 40px;
-	background: url(../img/arrow-2.png) right center no-repeat #555;
+	background: url(/static/img/arrow-2.png) right center no-repeat #555;
 	}
 
 	.blog-read a.readmore:hover {
-	background: url(../img/arrow-2.png) left center no-repeat #E1704B;
+	background: url(/static/img/arrow-2.png) left center no-repeat #E1704B;
 	}
 
 	.blog-read .preview {
@@ -4903,5 +4903,10 @@ background: url(../img/loader.gif) center no-repeat #fff;
 	h1.text-ultra-big{
 	font-size:32px;
 	line-height:40px;
+	}
+	.flag-icon .flag-icon-sun .flag-icon-squared {
+		background-size: contain;
+		background-position: 50%;
+		background-repeat: no-repeat;
 	}
 }

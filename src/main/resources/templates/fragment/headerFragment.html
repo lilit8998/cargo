@@ -3,31 +3,48 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.6.2/css/bootstrap-select.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/0.8.2/css/flag-icon.min.css">
+
 </head>
 <body>
 <div th:fragment="siteMenu">
     <div class="col-md-9">
         <nav id="mainmenu-container">
             <ul id="mainmenu">
-                <li><a href="index.html">Home</a></li>
-                <li><a href="services.html">Services</a></li>
-                <li><a href="about.html">About Us</a></li>
-                <li><a href="calculate.html">Calculate</a></li>
-                <li><a href="news.html">News</a></li>
-                <li><a href="gallery.html">Gallery</a></li>
-                <li><a href="contact.html">Contact</a></li>
-                <li><a href="registration.html">Registration</a></li>
-                <li><a href="loginPage.html">Login</a></li>
+                <li><a th:href="@{/}" th:text="#{home}">Home</a></li>
+                <li><a th:href="@{/services}" th:text="#{services}">Services</a></li>
+                <li><a th:href="@{/about}" th:text="#{about}">About Us</a></li>
+                <li><a th:href="@{/calculate}" th:text="#{calculate}">Calculate</a></li>
+                <li><a th:href="@{/news}" th:text="#{news}">News</a></li>
+                <li><a th:href="@{/gallery}" th:text="#{gallery}">Gallery</a></li>
+                <li><a th:href="@{/contact}" th:text="#{contact}">Contact</a></li>
+                <li><a th:if="${currentUser == null}" th:href="@{/user/registration}" th:text="#{registration}">Registration</a></li>
+                <li><a th:if="${currentUser == null}" th:href="@{/loginPage}" th:text="#{login}">Login</a></li>
+                <li th:if="${currentUser != null}"><a th:href="@{/logout}" th:text="#{logout}">Logout</a></li>
             </ul>
+            <form style=" position: relative;
+    bottom: 55px;
+    left: 440px;" id="languageForm" th:action="@{/change-language}" method="get">
+                    <select name="lang" id="langSelect" onchange="this.form.submit()">
+                        <option style="color: black" th:selected="${currentLang == 'en'}" value="en">English</option>
+                        <option style="color: black" th:selected="${currentLang == 'hy'}" value="hy">Armenian</option>
+                    </select>
+            </form>
         </nav>
 
-
         <div class="search text-right">
-            <input type="text" name="search" id="search" placeholder="search">
+            <input th:if="${currentUser != null}" type="text" name="search" id="search" placeholder="search">
         </div>
-
-
     </div>
 </div>
+
+<script>
+    document.getElementById('langSelect').addEventListener('change', function() {
+        document.getElementById('languageForm').submit();
+    });
+</script>
+
 </body>
 </html>

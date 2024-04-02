@@ -5785,7 +5785,10 @@ button.close {
     display: none !important;
   }
 
-
+  @media (min-width: 992px)
+  .col-md-9 {
+    width: 90%;
+  }
 
 }
 /*# sourceMappingURL=bootstrap.css.map */

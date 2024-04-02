@@ -46,3 +46,8 @@ Version:	1.0
     border: none;
     background: rgba(255, 255, 255, .2)
 }
+
+@media (min-width: 992px)
+.col-md-9 {
+    width: 83%;
+}

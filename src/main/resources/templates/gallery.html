@@ -8,14 +8,14 @@
     <meta name="author" content="">
 
     <!-- LOAD CSS FILES -->
-    <link href="/static/css/main.css" rel="stylesheet" type="text/css">
+    <link href="/css/main.css" rel="stylesheet" type="text/css">
 </head>
 
 <body>
     <div id="preloader"></div>
     <div id="wrapper">
         <!-- header begin -->
-        <header class="overlay">
+        <header>
             <div class="container">
                 <span id="menu-btn"></span>
 
@@ -26,17 +26,16 @@
                         <div id="logo">
                             <div class="inner">
                                 <a href="index.html">
-                                    <img src="img/logo.png" alt="" class="logo-1">
-                                    <img src="img/logo-2.png" alt="" class="logo-2">
+                                    <img src="/static/img/logo.png" alt="" class="logo-1">
+                                    <img src="/static/img/logo-2.png" alt="" class="logo-2">
                                 </a>
 
                             </div>
                         </div>
                         <!-- logo close -->
-
                     </div>
 
-                    <th:block th:include="/fragment/headerFragment::siteMenu"/>
+                    <div th:block th:include="~{/fragment/headerFragment::siteMenu}"></div>
                 </div>
             </div>
         </header>
@@ -52,7 +51,7 @@
                             <div class="crumb">
                                 <div class="deco">
                                     <ul>
-                                        <li><a href="index.html">Home</a></li>
+                                        <li><a th:href="@{/}">Home</a></li>
                                         <li>Gallery</li>
                                     </ul>
                                 </div>
@@ -77,14 +76,14 @@
                             <!-- gallery item -->
                             <div class="item illustration">
                                 <div class="picframe">
-                                    <a href="img/gallery/pic-1.jpg">
+                                    <a href="../img/gallery/pic-1.jpg">
                                         <span class="overlay"></span>
 
                                         <span class="pf_text">
                                             <span class="project-name">Military Logistic</span>
                                             <span class="small-border"></span>
                                         </span>
-                                        <img src="img/gallery/pic-1.jpg" alt="" />
+                                        <img src="../img/gallery/pic-1.jpg" alt="" />
                                     </a>
                                 </div>
                             </div>
@@ -93,14 +92,14 @@
                             <!-- gallery item -->
                             <div class="item mobile website">
                                 <div class="picframe">
-                                    <a href="img/gallery/pic-2.jpg">
+                                    <a href="../img/gallery/pic-2.jpg">
                                         <span class="overlay"></span>
 
                                         <span class="pf_text">
                                             <span class="project-name">Our Heavy Truck</span>
                                             <span class="small-border"></span>
                                         </span>
-                                        <img src="img/gallery/pic-2.jpg" alt="" />
+                                        <img src="../img/gallery/pic-2.jpg" alt="" />
                                     </a>
                                 </div>
                             </div>
@@ -109,14 +108,14 @@
                             <!-- gallery item -->
                             <div class="item website mobile">
                                 <div class="picframe">
-                                    <a href="img/gallery/pic-3.jpg">
+                                    <a href="../img/gallery/pic-3.jpg">
                                         <span class="overlay"></span>
 
                                         <span class="pf_text">
                                             <span class="project-name">Ocean Freight Cargo</span>
                                             <span class="small-border"></span>
                                         </span>
-                                        <img src="img/gallery/pic-3.jpg" alt="" />
+                                        <img src="../img/gallery/pic-3.jpg" alt="" />
                                     </a>
                                 </div>
                             </div>
@@ -125,14 +124,14 @@
                             <!-- gallery item -->
                             <div class="item illustration photography">
                                 <div class="picframe">
-                                    <a href="img/gallery/pic-4.jpg">
+                                    <a href="../img/gallery/pic-4.jpg">
                                         <span class="overlay"></span>
 
                                         <span class="pf_text">
                                             <span class="project-name">Heavy Duty Forklifts</span>
                                             <span class="small-border"></span>
                                         </span>
-                                        <img src="img/gallery/pic-4.jpg" alt="" />
+                                        <img src="../img/gallery/pic-4.jpg" alt="" />
                                     </a>
                                 </div>
                             </div>
@@ -141,14 +140,14 @@
                             <!-- gallery item -->
                             <div class="item website photography mobile">
                                 <div class="picframe">
-                                    <a href="img/gallery/pic-5.jpg">
+                                    <a href="../img/gallery/pic-5.jpg">
                                         <span class="overlay"></span>
 
                                         <span class="pf_text">
                                             <span class="project-name">Logistics Aircraft</span>
                                             <span class="small-border"></span>
                                         </span>
-                                        <img src="img/gallery/pic-5.jpg" alt="" />
+                                        <img src="../img/gallery/pic-5.jpg" alt="" />
                                     </a>
                                 </div>
                             </div>
@@ -157,14 +156,14 @@
                             <!-- gallery item -->
                             <div class="item illustration website">
                                 <div class="picframe">
-                                    <a href="img/gallery/pic-6.jpg">
+                                    <a href="../img/gallery/pic-6.jpg">
                                         <span class="overlay"></span>
 
                                         <span class="pf_text">
                                             <span class="project-name">Logistics Leadership Training</span>
                                             <span class="small-border"></span>
                                         </span>
-                                        <img src="img/gallery/pic-6.jpg" alt="" />
+                                        <img src="../img/gallery/pic-6.jpg" alt="" />
                                     </a>
                                 </div>
                             </div>
@@ -173,14 +172,14 @@
                             <!-- gallery item -->
                             <div class="item illustration photography">
                                 <div class="picframe">
-                                    <a href="img/gallery/pic-7.jpg">
+                                    <a href="../img/gallery/pic-7.jpg">
                                         <span class="overlay"></span>
 
                                         <span class="pf_text">
                                             <span class="project-name">Wood Container</span>
                                             <span class="small-border"></span>
                                         </span>
-                                        <img src="img/gallery/pic-7.jpg" alt="" />
+                                        <img src="../img/gallery/pic-7.jpg" alt="" />
                                     </a>
                                 </div>
                             </div>
@@ -189,14 +188,14 @@
                             <!-- gallery item -->
                             <div class="item photography mobile">
                                 <div class="picframe">
-                                    <a href="img/gallery/pic-8.jpg">
+                                    <a href="../img/gallery/pic-8.jpg">
                                         <span class="overlay"></span>
 
                                         <span class="pf_text">
                                             <span class="project-name">Railway Transport Logistics</span>
                                             <span class="small-border"></span>
                                         </span>
-                                        <img src="img/gallery/pic-8.jpg" alt="" />
+                                        <img src="../img/gallery/pic-8.jpg" alt="" />
                                     </a>
                                 </div>
                             </div>
@@ -205,14 +204,14 @@
                             <!-- gallery item -->
                             <div class="item photography mobile">
                                 <div class="picframe">
-                                    <a href="img/gallery/pic-9.jpg">
+                                    <a href="../img/gallery/pic-9.jpg">
                                         <span class="overlay"></span>
 
                                         <span class="pf_text">
                                             <span class="project-name">Cargo Airline</span>
                                             <span class="small-border"></span>
                                         </span>
-                                        <img src="img/gallery/pic-9.jpg" alt="" />
+                                        <img src="../img/gallery/pic-9.jpg" alt="" />
                                     </a>
                                 </div>
                             </div>
@@ -229,104 +228,7 @@
         </div>
         <!-- content close -->
         <!-- footer begin -->
-        <footer>
-            <div class="container">
-                <div class="row">
-
-                    <div class="col-md-4">
-                        <h3>Contact Us</h3>
-                        <div class="feature-box icon-square">
-                            <i class="fa fa-phone"></i>
-                            <div class="text">
-                                <p>
-                                    777 Street Fourth Avenue Somewhere Over Rainbow Green World, New York<br>
-                                    +22 090 1777 1998 &nbsp;&nbsp;&nbsp; +22 090 1777 1999<br>
-                                    office@exotheme.com
-                                </p>
-
-                                <!-- social icons -->
-                                <div class="social">
-                                    <a href="#"><i class="fa fa-facebook"></i></a>
-                                    <a href="#"><i class="fa fa-twitter"></i></a>
-                                    <a href="#"><i class="fa fa-rss"></i></a>
-                                    <a href="#"><i class="fa fa-google-plus"></i></a>
-                                    <a href="#"><i class="fa fa-envelope-o"></i></a>
-                                </div>
-                                <!-- social icons close -->
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-md-4">
-                        <h3>Bussiness Hours</h3>
-                        <div class="feature-box icon-square">
-                            <i class="fa fa-clock-o"></i>
-                            <div class="text">
-                                <ul class="list-border-bottom">
-                                    <li>
-                                        <span class="pull-left">Monday - Friday :</span>
-                                        <span class="pull-right id-color">9 am to 10 pm</span>
-                                        <div class="clearfix"></div>
-                                    </li>
-                                    <li>
-                                        <span class="pull-left">Saturday</span>
-                                        <span class="pull-right id-color">9 am to 5 pm</span>
-                                        <div class="clearfix"></div>
-                                    </li>
-                                    <li>
-                                        <span class="pull-left">Sunday & Official Holiday :</span>
-                                        <span class="pull-right id-color">Closed</span>
-                                        <div class="clearfix"></div>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-md-4">
-                        <h3>Newsletter Sign Up</h3>
-                        <div class="feature-box icon-square">
-                            <i class="fa fa-newspaper-o"></i>
-                            <div class="text">
-                                <p>Subscribe to our weekly newsletter to get information and promotion on your inbox</p>
-                                <div class="clearfix"></div>
-                                <div class="subscribe">
-                                    <div class="l-col">
-                                        <input type="text" class="form-control" name="subscribe-email" id="subscribe-email">
-                                    </div>
-                                    <div class="r-col">
-                                        <input class="form btn btn-custom" name="subscribe-submit" id="subscribe-submit" type="submit" value="Subscribe">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-md-12">
-                        <div class="divider-line"></div>
-                    </div>
-
-                    <div class="col-md-3">
-                        <div class="widget">
-                            <h3>Useful Links</h3>
-                            <ul class="list-2-col">
-                                <li><a href="">Services</a></li>
-                                <li><a href="">Contact Us</a></li>
-                                <li><a href="">Location</a></li>
-                            </ul>
-
-                        </div>
-                    </div>
-
-
-
-                </div>
-            </div>
-
-            <div class="subfooter">
-                &copy; Copyright 2015 - GoCargo by ExoTheme
-            </div>
-        </footer>
+        <div th:block th:include="~{/fragment/footerFragment::footerMenu}"></div>
         <!-- footer close -->
     </div>
 
