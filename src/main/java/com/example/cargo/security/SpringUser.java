@@ -4,14 +4,12 @@ import com.example.cargo.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.authority.AuthorityUtils;
 
-public class SpringUser extends org.springframework.security.core.userdetails.User{
-
-
+public class SpringUser extends org.springframework.security.core.userdetails.User {
     private User user;
 
     public SpringUser(User user) {
         super(user.getEmail(), user.getPassword(), AuthorityUtils.createAuthorityList(user.getUserRole().name()));
-       this.user = user;
+        this.user = user;
     }
 
     public com.example.cargo.entity.User getUser() {

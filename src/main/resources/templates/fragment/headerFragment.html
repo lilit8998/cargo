@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <title>Title</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.6.2/css/bootstrap-select.min.css">
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.6.2/css/bootstrap-select.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/0.8.2/css/flag-icon.min.css">
 
 </head>
@@ -20,17 +21,18 @@
                 <li><a th:href="@{/news}" th:text="#{news}">News</a></li>
                 <li><a th:href="@{/gallery}" th:text="#{gallery}">Gallery</a></li>
                 <li><a th:href="@{/contact}" th:text="#{contact}">Contact</a></li>
-                <li><a th:if="${currentUser == null}" th:href="@{/user/registration}" th:text="#{registration}">Registration</a></li>
+                <li><a th:if="${currentUser == null}" th:href="@{/user/registration}" th:text="#{registration}">Registration</a>
+                </li>
                 <li><a th:if="${currentUser == null}" th:href="@{/loginPage}" th:text="#{login}">Login</a></li>
                 <li th:if="${currentUser != null}"><a th:href="@{/logout}" th:text="#{logout}">Logout</a></li>
             </ul>
             <form style=" position: relative;
     bottom: 55px;
     left: 440px;" id="languageForm" th:action="@{/change-language}" method="get">
-                    <select name="lang" id="langSelect" onchange="this.form.submit()">
-                        <option style="color: black" th:selected="${currentLang == 'en'}" value="en">English</option>
-                        <option style="color: black" th:selected="${currentLang == 'hy'}" value="hy">Armenian</option>
-                    </select>
+                <select name="lang" id="langSelect" onchange="this.form.submit()">
+                    <option style="color: black" th:selected="${currentLang == 'en'}" value="en">English</option>
+                    <option style="color: black" th:selected="${currentLang == 'hy'}" value="hy">Armenian</option>
+                </select>
             </form>
         </nav>
 
@@ -41,7 +43,7 @@
 </div>
 
 <script>
-    document.getElementById('langSelect').addEventListener('change', function() {
+    document.getElementById('langSelect').addEventListener('change', function () {
         document.getElementById('languageForm').submit();
     });
 </script>

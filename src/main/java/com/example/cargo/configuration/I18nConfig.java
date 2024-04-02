@@ -16,7 +16,7 @@ import java.util.Locale;
 public class I18nConfig implements WebMvcConfigurer {
 
     @Bean
-    public LocaleResolver localeResolver(){
+    public LocaleResolver localeResolver() {
         Locale.setDefault(Locale.US);
         SessionLocaleResolver slr = new SessionLocaleResolver();
         slr.setDefaultLocale(Locale.US);
@@ -29,7 +29,6 @@ public class I18nConfig implements WebMvcConfigurer {
         interceptor.setParamName("lang");
         return interceptor;
     }
-
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(localeChangeInterceptor());

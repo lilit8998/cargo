@@ -1,7 +1,6 @@
 package com.example.cargo.endpoint;
 
 import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,30 +12,33 @@ import java.util.Locale;
 @Controller
 public class HomeController {
 
+    @Autowired
+    private LocaleResolver localeResolver;
 
-@Autowired
-private LocaleResolver localeResolver;
-@GetMapping("/")
-public String home(Model model, HttpServletRequest request, HttpServletResponse response) {
-    Locale currentLocale = localeResolver.resolveLocale(request);
-    model.addAttribute("currentLang", currentLocale.getLanguage());
-    return "index";
-}
+    @GetMapping("/")
+    public String home(Model model, HttpServletRequest request) {
+        Locale currentLocale = localeResolver.resolveLocale(request);
+        model.addAttribute("currentLang", currentLocale.getLanguage());
+        return "index";
+    }
 
     @GetMapping("/services")
-    public String services(){
+    public String services() {
         return "services";
     }
+
     @GetMapping("/about")
-    public String about(){
+    public String about() {
         return "services";
     }
+
     @GetMapping("/gallery")
-    public String gallery(){
+    public String gallery() {
         return "gallery";
     }
+
     @GetMapping("/news")
-    public String news(){
+    public String news() {
         return "news";
     }
 }

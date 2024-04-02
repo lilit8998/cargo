@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class CalculateController {
 
     @GetMapping("/calculate")
-    public String calculate(){
+    public String calculate() {
         return "calculate";
     }
 }
