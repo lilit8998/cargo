@@ -23,19 +23,19 @@
                 <li><a th:href="@{/contact}" th:text="#{contact}">Contact</a></li>
                 <li><a th:if="${currentUser == null}" th:href="@{/user/registration}" th:text="#{registration}">Registration</a>
                 </li>
-                <li><a th:if="${currentUser == null}" th:href="@{/loginPage}" th:text="#{login}">Login</a></li>
+                <li><a th:if="${currentUser == null}" th:href="@{/user/loginPage}" th:text="#{login}">Login</a></li>
                 <li th:if="${currentUser != null}"><a th:href="@{/logout}" th:text="#{logout}">Logout</a></li>
             </ul>
-            <form style=" position: relative;
-    bottom: 55px;
-    left: 440px;" id="languageForm" th:action="@{/change-language}" method="get">
-                <select name="lang" id="langSelect" onchange="this.form.submit()">
-                    <option style="color: black" th:selected="${currentLang == 'en'}" value="en">English</option>
-                    <option style="color: black" th:selected="${currentLang == 'hy'}" value="hy">Armenian</option>
-                </select>
-            </form>
-        </nav>
 
+        </nav>
+        <form style="position: relative;
+    bottom: 68px;
+    left: 1063px" id="languageForm" th:action="@{/change-language}" method="get">
+            <select name="lang" id="langSelect" onchange="this.form.submit()">
+                <option style="color: black" th:selected="${currentLang == 'en'}" value="en">English</option>
+                <option style="color: black" th:selected="${currentLang == 'hy'}" value="hy">Armenian</option>
+            </select>
+        </form>
         <div class="search text-right">
             <input th:if="${currentUser != null}" type="text" name="search" id="search" placeholder="search">
         </div>

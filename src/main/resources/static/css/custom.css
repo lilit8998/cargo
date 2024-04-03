@@ -49,10 +49,11 @@ font-weight:lighter;
 font-family: "Lato";
 font-size:14px;
 font-weight: 500;
+    padding: 20px;
 }
 
 #mainmenu a {
-padding: 10px 22px 8px 22px;
+    padding: 21px 26px 21px 26px;
 }
 
 /* heading settings */
