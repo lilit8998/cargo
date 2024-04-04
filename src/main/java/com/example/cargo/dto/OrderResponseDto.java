@@ -11,6 +11,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Data
 @AllArgsConstructor
@@ -18,8 +19,8 @@ import java.time.LocalDate;
 @Builder
 public class OrderResponseDto {
     private long id;
-    private LocalDate sendDate;
-    private LocalDate deliveredDate;
+    private LocalDateTime sendDate;
+    private LocalDateTime deliveredDate;
     private OrderStatus orderStatus;
     private String orderLocation;
     private Transport transportType;

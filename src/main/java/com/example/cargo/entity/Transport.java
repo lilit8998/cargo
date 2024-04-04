@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import lombok.Data;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "transportation_type")
@@ -15,8 +16,10 @@ public class Transport {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private LocalDate startDate;
-    private LocalDate endDate;
+    @Temporal(TemporalType.TIMESTAMP)
+    private LocalDateTime startDate;
+    @Temporal(TemporalType.TIMESTAMP)
+    private LocalDateTime endDate;
     private String from;
     private String to;
     private double price;

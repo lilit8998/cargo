@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.Data;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "news")
@@ -15,6 +16,6 @@ public class News {
     private Long id;
     private String title;
     private String description;
-    private LocalDate publishDate;
+    private LocalDateTime publishDate;
 
 }

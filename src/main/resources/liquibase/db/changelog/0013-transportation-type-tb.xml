@@ -1,0 +1,39 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+    <changeSet id="0013-transportation-type-tb" author="lpoghosyan">
+        <createTable tableName="transportation_type">
+            <column name="id" type="BIGINT" autoIncrement="true">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="start_date" type="date">
+                <constraints nullable="false"/>
+            </column>
+            <column name="end_date" type="date">
+                <constraints nullable="false"/>
+            </column>
+            <column name="from" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="to" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="price" type="decimal(5,3)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="drive_type" type="enum('AIR','OCEAN')">
+                <constraints nullable="true"/>
+            </column>
+        </createTable>
+        <addForeignKeyConstraint baseTableName="transportation_type"
+                                 baseColumnNames="id"
+                                 constraintName="order_transportation_type"
+                                 referencedTableName="orders"
+                                 referencedColumnNames="id"
+                                 onDelete="CASCADE"/>
+
+    <createIndex tableName="transportation_type" indexName="index_driveType">
+        <column name="drive_type"/>
+    </createIndex>
+    </changeSet>
+</databaseChangeLog>
