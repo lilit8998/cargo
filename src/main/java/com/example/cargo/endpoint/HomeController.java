@@ -26,6 +26,12 @@ public class HomeController {
     public String services() {
         return "services";
     }
+    @GetMapping("/loginBranch")
+    public String loginBranch() {
+        return "loginBranch";
+    }
+
+
 
     @GetMapping("/about")
     public String about() {

@@ -22,4 +22,9 @@ public class Branch {
 
     @ManyToOne
     private Orders orders;
+
+    private String email;
+
+    private String password;
+
 }

@@ -16,6 +16,6 @@ public class News {
     private Long id;
     private String title;
     private String description;
-    private LocalDateTime publishDate;
+    private LocalDate publishDate;
 
 }

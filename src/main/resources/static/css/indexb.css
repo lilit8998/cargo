@@ -87,8 +87,8 @@ form .button {
 	justify-content: center;
 }
 .logo img {
-	width: 270px;
-	height: 80px;
+	width: 153px;
+	height: 70px;
 	margin-top: 200px;
 }
 .logo p {
@@ -142,7 +142,8 @@ form .button {
 	margin: 21px 36px;
 	display: flex;
 	position: relative;
-	top: 5px;
+	top: -3px;
+	left: 33px;
 }
 
 .href input {
