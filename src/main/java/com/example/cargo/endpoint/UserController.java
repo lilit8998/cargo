@@ -2,7 +2,6 @@ package com.example.cargo.endpoint;
 
 import com.example.cargo.entity.User;
 import com.example.cargo.entity.enums.UserRole;
-import com.example.cargo.repository.UserRepository;
 import com.example.cargo.security.SpringUser;
 import com.example.cargo.service.UserService;
 import jakarta.validation.Valid;
@@ -14,8 +13,6 @@ import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.Optional;
 
 @Controller
 @RequestMapping("/user")

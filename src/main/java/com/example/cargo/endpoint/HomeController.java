@@ -1,6 +1,8 @@
 package com.example.cargo.endpoint;
 
+import com.example.cargo.util.GetCitiesAndCountries;
 import jakarta.servlet.http.HttpServletRequest;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -10,10 +12,11 @@ import org.springframework.web.servlet.LocaleResolver;
 import java.util.Locale;
 
 @Controller
+@RequiredArgsConstructor
 public class HomeController {
 
-    @Autowired
-    private LocaleResolver localeResolver;
+    private  final LocaleResolver localeResolver;
+    private  final GetCitiesAndCountries getCitiesAndCountries;
 
     @GetMapping("/")
     public String home(Model model, HttpServletRequest request) {
@@ -46,5 +49,15 @@ public class HomeController {
     @GetMapping("/news")
     public String news() {
         return "news";
+    }
+    @GetMapping("/adminHome")
+    public String adminHome() {
+        return "/admin/adminHome";
+    }
+
+    @GetMapping("/countriesAndCities")
+    public String getCountriesAndCities(){
+        getCitiesAndCountries.getAllCountries();
+     return "/admin/adminHome";
     }
 }

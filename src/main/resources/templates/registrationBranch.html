@@ -4,7 +4,6 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Registration</title>
-    <link rel="stylesheet" type="text/css" href="/static/css/indexRegistb.css">
     <script src="https://kit.fontawesome.com/0f145f388b.js" crossorigin="anonymous"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -13,6 +12,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
     <link rel="shortcut icon" href="img/Transportation-16x16.png" type="image/x-icon">
+    <link rel="stylesheet" type="text/css" href="/static/css/indexRegistb.css">
 </head>
 <body>
 <div id="preloader"></div>
@@ -20,7 +20,6 @@
     <header>
         <div class="container">
             <span id="menu-btn"></span>
-
             <div class="row">
                 <div th:block th:include="~{/fragment/headerFragment::siteMenu}"></div>
             </div>
@@ -32,68 +31,27 @@
         <div class="login">
             <div class="header">
                 <div class="logo">
-                    <img src="/static/img/logo.png" alt="logo">
+                    <img src="/static/img/logo-2.png" alt="logo">
                 </div>
-
             </div>
             <div class="title">
                 <h1>Branch registration</h1>
-                <p>Have an account? <a href="loginBranch.html">Login</a></p>
+                <p>Have an account? <a href="/branch/loginBranch">Login</a></p>
             </div>
-            <form method="POST" action="">
+            <span th:if="${msg != null}" th:text="${msg}" style="color: red"></span>
+
+            <form method="POST" action="/branch/register" >
                 <div>
-                    <label for="country">
-                        Country
-                    </label>
+                    <input type="text" id="address" name="address" placeholder="Address" />
                 </div>
                 <div>
-                    <select required>
-                        <option selected disabled=true>Country</option>
-                        <option value="1">Armenia</option>
-                        <option value="2">Russia</option>
-                        <option value="3">Germany</option>
-                    </select>
+                    <input type="text" id="email" name="email" placeholder="Email" />
                 </div>
                 <div>
-                    <label for="city">
-                        City
-                    </label>
-                </div>
-                <div>
-                    <select required>
-                        <option selected disabled=true>Country</option>
-                        <option value="1">Armenia</option>
-                        <option value="2">Russia</option>
-                        <option value="3">Germany</option>
-                    </select>
-                </div>
-                <div>
-                    <label for="email">
-                        Address
-                    </label>
-                </div>
-                <div>
-                    <input type="text" name="address" placeholder="Address" required>
-                </div>
-                <div>
-                    <label for="email">
-                        Email
-                    </label>
-                </div>
-                <div>
-                    <input type="email" name="email" placeholder="Email" required>
-                </div>
-                <div>
-                    <label for="password">
-                        Password
-                    </label>
-                </div>
-                <div>
-                    <input type="password" name="password" placeholder="Password" required>
+                    <input type="password" id="password" name="password" placeholder="Password"/>
                 </div>
 
-
-                <input type="submit" class="button" value="Registration" name="Registration">
+                <input type="submit" class="button" value="Register"/>
             </form>
         </div>
         <div class="background">
@@ -102,7 +60,7 @@
 
     </div>
 
-</div>
-<div th:block th:include="~{/fragment/footerFragment::footerMenu}"></div>
+        </div>
+        <div th:block th:include="~{/fragment/footerFragment::footerMenu}"></div>
 </body>
 </html>
