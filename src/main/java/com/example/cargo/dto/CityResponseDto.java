@@ -1,0 +1,18 @@
+package com.example.cargo.dto;
+
+import com.example.cargo.entity.Country;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
+public class CityResponseDto {
+
+    private long id;
+    private String name;
+    private Country country;
+}
