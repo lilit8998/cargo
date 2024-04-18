@@ -25,8 +25,6 @@ public class GetCityAndCountry {
     private final RestTemplate restTemplate;
     private final CountryRepository countryRepository;
     private final CityRepository cityRepository;
-    private final ObjectMapper objectMapper;
-
 
     public ResponseEntity<?> getAllCountries() {
         ResponseEntity<String> responseEntity = restTemplate.getForEntity(apiUrl, String.class);
