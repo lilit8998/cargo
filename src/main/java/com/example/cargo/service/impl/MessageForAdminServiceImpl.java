@@ -14,6 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -32,11 +33,9 @@ public class MessageForAdminServiceImpl implements MessageForAdminService {
     @Override
     public List<MessageForAdminResponseDto> getAll() {
         List<MessageForAdmin> all = messageForAdminRepository.findAll();
-        List<MessageForAdminResponseDto> messageForAdminResponseDto = new ArrayList<>();
-        for (MessageForAdmin messageForAdmin : all) {
-            messageForAdminResponseDto.add(messageforAdminMapper.map(messageForAdmin));
-        }
-        return messageForAdminResponseDto;
+        return all.stream()
+                .map(messageforAdminMapper::map)
+                .collect(Collectors.toList());
     }
 
     public MessageForAdmin findMessageForAdminById(int id) {

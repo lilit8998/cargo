@@ -8,6 +8,7 @@ import com.example.cargo.repository.CityRepository;
 import com.example.cargo.service.CityService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,12 +20,14 @@ public class CityServiceImpl implements CityService {
     private final CityMapper cityMapper;
 
     @Override
+    @Transactional
     public CityResponseDto save(SaveCityDto saveCityDto) {
         City city = cityMapper.map(saveCityDto);
         return cityMapper.map(cityRepository.save(city));
     }
 
     @Override
+    @Transactional(readOnly = true)
     public List<CityResponseDto> getAll() {
         List<City> all = cityRepository.findAll();
         List<CityResponseDto> cityResponseDto = new ArrayList<>();
@@ -34,6 +37,8 @@ public class CityServiceImpl implements CityService {
         return cityResponseDto;
     }
 
+    @Override
+    @Transactional(readOnly = true)
     public CityResponseDto findCityById(int id) {
         City city = cityRepository.findById(id).orElse(null);
         if (city == null) {
@@ -43,6 +48,7 @@ public class CityServiceImpl implements CityService {
     }
 
     @Override
+    @Transactional
     public void deleteById(int id) {
         cityRepository.deleteById(id);
     }

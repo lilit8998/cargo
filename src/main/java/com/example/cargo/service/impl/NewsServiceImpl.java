@@ -40,10 +40,10 @@ public class NewsServiceImpl implements NewsService {
 
     public NewsResponseDto findNewsById(int id) {
         News news = newsRepository.findById(id).orElse(null);
-        if (news == null) {
-            return null;
-        }
-        return newsMapper.map(news);
+        return newsRepository.findById(id)
+                .map(newsMapper::map)
+                .orElse(new NewsResponseDto());
+
     }
 
     @Override
