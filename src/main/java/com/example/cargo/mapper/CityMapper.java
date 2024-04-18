@@ -14,7 +14,6 @@ public interface CityMapper {
 
     CityResponseDto map(City city);
 
-
     City map(SaveCityDto saveCityDto);
 
 }

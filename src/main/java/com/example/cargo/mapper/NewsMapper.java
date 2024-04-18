@@ -15,5 +15,6 @@ public interface NewsMapper {
     NewsResponseDto map(News news);
 
     @Mapping(target = "publishDate", expression = "java(LocalDate.now())")
+  
     News map(SaveNewsDto saveNewsDto);
 }
