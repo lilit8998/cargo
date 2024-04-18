@@ -32,13 +32,12 @@
             <span id="menu-btn"></span>
 
             <div class="row">
-                <div th:block th:include="~{/fragment/headerFragment::siteMenu}"></div>
+                <div th:block data-th-insert="~{/fragment/headerFragment::siteMenu}"></div>
             </div>
         </div>
     </header>
 
-    <!-- hea
-    der close -->
+    <!-- header close -->
     <div class="flex-container">
         <div class="main-container">
             <div class="login">
@@ -50,9 +49,9 @@
                 </div>
                 <div class="title">
                     <h1>Registration</h1>
-                    <p>Have an account? <a href="loginPage.html">Login</a></p>
+                    <p>Have an account? <a th:href="@{/user/loginPage}">Login</a></p>
                 </div>
-                <span th:if="${msg != null}" th:text="${msg}" style="color: red"></span>
+                <span th:if="${msg != null and msg != ''}" th:text="${msg}" style="color: red"></span>
 
                 <form th:method="POST" th:action="@{/user/registration}" th:object="${user}">
                     <div>
@@ -65,7 +64,7 @@
                               th:errorclass="error"></span>
                     </div>
                     <div>
-                        <input th:field="*{email}" type="email" name="email" placeholder="Email" required/>
+                        <input th:field="*{email}" type="email" name="email" placeholder="Email" required />
                         <span th:if="${#fields.hasErrors('email')}" th:errors="*{email}" th:errorclass="error"></span>
                     </div>
                     <div>
@@ -78,10 +77,8 @@
                     </div>
                     <div>
                         <input th:field="*{password}" type="password" name="password" placeholder="Password" required/>
-                        <span th:if="${#fields.hasErrors('password')}" th:errors="*{password}"
-                              th:errorclass="error"></span>
+                        <span th:if="${#fields.hasErrors('password')}" th:errors="*{password}" th:errorclass="error"></span>
                     </div>
-
 
                     <input type="submit" class="button" value="Register"/>
                 </form>
@@ -93,7 +90,7 @@
         </div>
 
     </div>
-    <div th:block th:include="~{/fragment/footerFragment::footerMenu}"></div>
+    <div th:block data-th-insert="~{/fragment/footerFragment::footerMenu}"></div>
 </div>
 </body>
 </html>
