@@ -4,8 +4,11 @@ import com.example.cargo.entity.User;
 import com.example.cargo.repository.UserRepository;
 import com.example.cargo.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 
@@ -52,4 +55,21 @@ public class UserServiceImpl implements UserService {
     public boolean isEmailExists(String email) {
         return userRepository.findByEmail(email).isPresent();
     }
+
+    @Override
+    @Transactional
+    public User updateUser(User user) {
+      User existingUser = userRepository.findById(user.getId().describeConstable().orElseThrow(() -> new IllegalArgumentException("User not fount")));
+      if (existingUser != null) {
+          existingUser.setName(user.getName());
+          existingUser.setSurname(user.getSurname());
+          existingUser.setEmail(user.getEmail());
+          existingUser.setPhone(user.getPhone());
+          return userRepository.save(existingUser);
+      }else {
+          return null;
+      }
+
+    }
+
 }

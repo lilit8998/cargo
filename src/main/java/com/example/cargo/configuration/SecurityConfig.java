@@ -20,17 +20,11 @@ import org.springframework.security.config.annotation.web.configurers.AbstractHt
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
-//
-//    @Autowired
-//    private PasswordEncoder passwordEncoder;
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
     @Autowired
     private UserDetailService userDetailService;
-
-//    public SecurityConfig(UserDetailService userDetailService, PasswordEncoder passwordEncoder) {
-//        this.userDetailService = userDetailService;
-//        this.passwordEncoder = passwordEncoder;
-//    }
-
 
     @Bean
     public SecurityFilterChain configure(HttpSecurity httpSecurity) throws Exception {
@@ -53,16 +47,12 @@ public class SecurityConfig {
                         .logoutSuccessUrl("/"));
         return httpSecurity.build();
     }
-    @Bean
-    public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
-    }
 
-//    @Bean
-//    public AuthenticationProvider authenticationProvider() {
-//        DaoAuthenticationProvider authenticationProvider = new DaoAuthenticationProvider();
-//        authenticationProvider.setUserDetailsService(userDetailService);
-//        authenticationProvider.setPasswordEncoder(passwordEncoder);
-//        return authenticationProvider;
-//    }
+    @Bean
+    public AuthenticationProvider authenticationProvider() {
+        DaoAuthenticationProvider authenticationProvider = new DaoAuthenticationProvider();
+        authenticationProvider.setUserDetailsService(userDetailService);
+        authenticationProvider.setPasswordEncoder(passwordEncoder);
+        return authenticationProvider;
+    }
 }

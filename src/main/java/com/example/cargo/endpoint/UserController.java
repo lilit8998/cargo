@@ -1,5 +1,6 @@
 package com.example.cargo.endpoint;
 
+import com.example.cargo.dto.UserDto;
 import com.example.cargo.entity.User;
 import com.example.cargo.entity.enums.UserRole;
 import com.example.cargo.repository.UserRepository;
@@ -9,16 +10,14 @@ import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
 
-import java.lang.reflect.InvocationTargetException;
+import java.io.IOException;
 import java.util.Optional;
 
 @Controller
@@ -26,14 +25,15 @@ import java.util.Optional;
 public class UserController {
     private final UserService userService;
 
-    @Autowired
-    private PasswordEncoder passwordEncoder;
-    @Autowired
-    private UserRepository userRepository;
+    private final   PasswordEncoder passwordEncoder;
 
-    @Autowired
-    public UserController(UserService userService) {
+    private final UserRepository userRepository;
+
+
+    public UserController(UserService userService, PasswordEncoder passwordEncoder, UserRepository userRepository) {
         this.userService = userService;
+        this.passwordEncoder = passwordEncoder;
+        this.userRepository = userRepository;
     }
 
     @GetMapping("/account")
@@ -52,34 +52,34 @@ public class UserController {
     }
 
     @PostMapping("/registration")
-    public String userRegister(@Valid @ModelAttribute("user") User user, BindingResult result, Model model) {
+    public String userRegister(@Valid @ModelAttribute("user") UserDto userDto,
+                               BindingResult result, Model model) {
+
         if (result.hasErrors()) {
-            result.getAllErrors().forEach(error -> System.out.println(error.getDefaultMessage()));
             return "registration";
         }
+        if (userService.isEmailExists(userDto.getEmail())) {
+            return "redirect:/user/registration?msg=Email already in use";
+        }
+
+        String encodedPassword = passwordEncoder.encode(userDto.getPassword());
+
+        User user = new User();
+        user.setName(userDto.getName());
+        user.setSurname(userDto.getSurname());
+        user.setEmail(userDto.getEmail());
+        user.setPhone(userDto.getPhone());
+        user.setPassword(encodedPassword);
+        user.setDob(userDto.getDob());
+        user.setUserRole(UserRole.USER);
+
         try {
-            if (userService.isEmailExists(user.getEmail())) {
-                return "redirect:/user/registration?msg=Email already in use";
-            }
-            user.setPassword(passwordEncoder.encode(user.getPassword()));
             userService.save(user);
+            model.addAttribute("registeredUser", user);
             return "redirect:/user/registration?msg=User registered";
         } catch (Exception e) {
-            e.printStackTrace();
-            return "redirect:/user/registration?msg=An unexpected error occurred";
+            return "redirect:/user/registration?msg=Error occurred during registration";
         }
-    }
-
-
-    @RequestMapping(value = "/updateUser")
-    public String up(ModelMap map, @RequestParam(name = "message", required = false) String message, @ModelAttribute("add") User ser1,
-                     @AuthenticationPrincipal UserDetails userDetails) {
-        if (userDetails != null) {
-            map.addAttribute("message", message != null ? message : "");
-            User user = ((SpringUser) userDetails).getUser();
-            map.addAttribute("current", userRepository.findById(user.getId()));
-        }
-        return "userUpdate";
     }
 
     @GetMapping("/loginPage")
@@ -117,6 +117,29 @@ public class UserController {
             return "redirect:/news";
         }
     }
+    @GetMapping("/update/{id}")
+    public String updateForm(@PathVariable("id") long id, ModelMap model) {
+        Optional<Object> userOptional = userService.findById(id);
+        if (userOptional.isPresent()) {
+            model.addAttribute("user", userOptional.get());
+            return "user/update";
+        } else {
+            return "/";
+        }
+    }
+
+    @PostMapping("/update")
+    public String updateUser(@ModelAttribute User updatedUser, ModelMap model) {
+        try {
+            userService.updateUser(updatedUser);
+            return "redirect:/user/account?msg=User updated";
+        } catch (Exception e) {
+            model.addAttribute("error", e.getMessage());
+            return "user/update";
+        }
+    }
+
+
     @GetMapping("/admin/home")
     public String adminHomePage() {
         return "admin/adminHome";
