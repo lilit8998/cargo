@@ -1,14 +1,14 @@
 package com.example.cargo.service.impl;
 
+import com.example.cargo.dto.UserDto;
 import com.example.cargo.entity.User;
+import com.example.cargo.mapper.UserMapper;
 import com.example.cargo.repository.UserRepository;
 import com.example.cargo.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 
@@ -16,9 +16,12 @@ import java.util.Optional;
 public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
 
+    private final UserMapper userMapper;
+
     @Autowired
-    public UserServiceImpl(UserRepository userRepository) {
+    public UserServiceImpl(UserRepository userRepository, UserMapper userMapper) {
         this.userRepository = userRepository;
+        this.userMapper = userMapper;
     }
 
     @Override
@@ -58,18 +61,17 @@ public class UserServiceImpl implements UserService {
 
     @Override
     @Transactional
-    public User updateUser(User user) {
-      User existingUser = userRepository.findById(user.getId().describeConstable().orElseThrow(() -> new IllegalArgumentException("User not fount")));
-      if (existingUser != null) {
-          existingUser.setName(user.getName());
-          existingUser.setSurname(user.getSurname());
-          existingUser.setEmail(user.getEmail());
-          existingUser.setPhone(user.getPhone());
-          return userRepository.save(existingUser);
-      }else {
-          return null;
-      }
-
+    public User updateUser(UserDto userDto) {
+        Long userId = userDto.getId();
+        if (userId == null) {
+            throw new IllegalArgumentException("User ID cannot be null");
+        }
+        User existingUser = userRepository.findById(userId);
+        userMapper.updateUserFromDto(userDto, existingUser);
+        if (userDto.getPassword() != null && !userDto.getPassword().isEmpty()) {
+            String encodedPassword = userDto.getPassword();
+            existingUser.setPassword(encodedPassword);
+        }
+        return userRepository.save(existingUser);
     }
-
 }

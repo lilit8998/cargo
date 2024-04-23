@@ -3,7 +3,9 @@ package com.example.cargo.entity;
 
 import com.example.cargo.entity.enums.UserRole;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.*;
 import lombok.Data;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
 

@@ -47,7 +47,7 @@
                     </div>
 
                 </div>
-                <form  th:action="@{/user/update}" th:object="${user}" method="post">
+                <form th:action="@{/user/update}" th:object="${user}" method="post">
                     <input type="hidden" th:field="*{id}"/>
                     <div>
                         <label>Name:</label>

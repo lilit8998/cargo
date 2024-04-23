@@ -3,12 +3,12 @@ package com.example.cargo.endpoint;
 import com.example.cargo.dto.UserDto;
 import com.example.cargo.entity.User;
 import com.example.cargo.entity.enums.UserRole;
+import com.example.cargo.mapper.UserMapper;
 import com.example.cargo.repository.UserRepository;
 import com.example.cargo.security.SpringUser;
 import com.example.cargo.service.UserService;
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -17,7 +17,6 @@ import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
-import java.io.IOException;
 import java.util.Optional;
 
 @Controller
@@ -25,15 +24,18 @@ import java.util.Optional;
 public class UserController {
     private final UserService userService;
 
-    private final   PasswordEncoder passwordEncoder;
+    private final PasswordEncoder passwordEncoder;
 
     private final UserRepository userRepository;
 
+    private final UserMapper userMapper;
 
-    public UserController(UserService userService, PasswordEncoder passwordEncoder, UserRepository userRepository) {
+    public UserController(UserService userService, PasswordEncoder passwordEncoder,
+                          UserRepository userRepository, UserMapper userMapper) {
         this.userService = userService;
         this.passwordEncoder = passwordEncoder;
         this.userRepository = userRepository;
+        this.userMapper = userMapper;
     }
 
     @GetMapping("/account")
@@ -59,12 +61,12 @@ public class UserController {
             return "registration";
         }
         if (userService.isEmailExists(userDto.getEmail())) {
-            return "redirect:/user/registration?msg=Email already in use";
+            model.addAttribute("msg", "This email address is already in use.");
+            return "redirect:/user/registration";
         }
 
+        User user = userMapper.map(userDto);
         String encodedPassword = passwordEncoder.encode(userDto.getPassword());
-
-        User user = new User();
         user.setName(userDto.getName());
         user.setSurname(userDto.getSurname());
         user.setEmail(userDto.getEmail());
@@ -75,10 +77,11 @@ public class UserController {
 
         try {
             userService.save(user);
-            model.addAttribute("registeredUser", user);
-            return "redirect:/user/registration?msg=User registered";
+            model.addAttribute("msg", "User has been registered successfully.");
+            return "redirect:/user/registration";
         } catch (Exception e) {
-            return "redirect:/user/registration?msg=Error occurred during registration";
+            model.addAttribute("msg", e.getMessage());
+            return "redirect:/user/registration";
         }
     }
 
@@ -117,6 +120,7 @@ public class UserController {
             return "redirect:/news";
         }
     }
+
     @GetMapping("/update/{id}")
     public String updateForm(@PathVariable("id") long id, ModelMap model) {
         Optional<Object> userOptional = userService.findById(id);
@@ -131,14 +135,27 @@ public class UserController {
     @PostMapping("/update")
     public String updateUser(@ModelAttribute User updatedUser, ModelMap model) {
         try {
-            userService.updateUser(updatedUser);
+            UserDto userDto = convertUserToDto(updatedUser);
+            userService.updateUser(userDto);
             return "redirect:/user/account?msg=User updated";
-        } catch (Exception e) {
+        } catch (IllegalArgumentException e) {
             model.addAttribute("error", e.getMessage());
+            return "user/update";
+        } catch (Exception e) {
+            model.addAttribute("error", "An unexpected error occurred while updating the user.");
             return "user/update";
         }
     }
 
+    private UserDto convertUserToDto(User user) {
+        UserDto userDto = new UserDto();
+        userDto.setId(user.getId());
+        userDto.setName(user.getName());
+        userDto.setSurname(user.getSurname());
+        userDto.setEmail(user.getEmail());
+        userDto.setPhone(user.getPhone());
+        return userDto;
+    }
 
     @GetMapping("/admin/home")
     public String adminHomePage() {

@@ -1,5 +1,8 @@
 package com.example.cargo.dto;
 
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 import jakarta.validation.constraints.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -14,6 +17,9 @@ import java.util.Date;
 @NoArgsConstructor
 @Builder
 public class UserDto {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     @NotBlank(message = "Name can't be empty")
     @Size(min = 3, max = 25, message = "Name size must be between 3 and 25")

@@ -1,5 +1,6 @@
 package com.example.cargo.service;
 
+import com.example.cargo.dto.UserDto;
 import com.example.cargo.entity.User;
 
 import java.io.IOException;
@@ -21,5 +22,5 @@ public interface UserService {
 
     boolean isEmailExists(String email);
 
-    User updateUser(User user) throws IOException;
+    User updateUser(UserDto user) throws IOException;
 }
