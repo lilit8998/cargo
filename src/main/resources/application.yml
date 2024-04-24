@@ -3,10 +3,29 @@ spring:
     url: jdbc:mysql://localhost:3306/cargo
     username: root
     password: root
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: cargo9088@gmail.com
+    password: wkutveorncbagzjc
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
   jpa:
     hibernate:
       ddl-auto: none
-
+  logging:
+    level:
+      root: info
+      am.itspace: debug
+    file:
+      name: C:\Users\Lenovo\IdeaProjects\cargo\log\
+    logback:
+      rollingpolicy:
+        max-file-size: 1MB
   liquibase:
     change-log: classpath:liquibase/db/change-log.xml
     enabled: true

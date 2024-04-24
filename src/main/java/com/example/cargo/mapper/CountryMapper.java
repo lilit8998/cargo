@@ -12,9 +12,9 @@ import java.time.LocalDate;
 @Mapper(componentModel = "spring", nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE,
         imports = LocalDate.class)
 public interface CountryMapper {
-    CountryResponseDto map(Country country);
-
-    @Mapping(target = "sendDto", expression = "java(LocalDate.now())")
-    Country map(SaveCountryDto saveCountryDto);
+//    CountryResponseDto map(Country country);
+//
+//    @Mapping(target = "sendDto", expression = "java(LocalDate.now())")
+//    Country map(SaveCountryDto saveCountryDto);
 
 }

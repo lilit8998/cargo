@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -18,10 +19,13 @@ public class UserServiceImpl implements UserService {
 
     private final UserMapper userMapper;
 
+    private final SendMailService sendMailService;
+
     @Autowired
-    public UserServiceImpl(UserRepository userRepository, UserMapper userMapper) {
+    public UserServiceImpl(UserRepository userRepository, UserMapper userMapper, SendMailService sendMailService) {
         this.userRepository = userRepository;
         this.userMapper = userMapper;
+        this.sendMailService = sendMailService;
     }
 
     @Override
@@ -72,6 +76,24 @@ public class UserServiceImpl implements UserService {
             String encodedPassword = userDto.getPassword();
             existingUser.setPassword(encodedPassword);
         }
+
         return userRepository.save(existingUser);
     }
+
+    @Override
+    public User findByToken(String token) {
+        return (User) userRepository.findByToken(token).orElse(null);
+    }
+
+    @Override
+    public User register(User user) {
+        String activationToken = UUID.randomUUID().toString();
+        user.setActive(false);
+        user.setToken(activationToken);
+        User save = userRepository.save(user);
+        sendMailService.sendWelcomeMail(user);
+        return save;
+    }
+
+
 }

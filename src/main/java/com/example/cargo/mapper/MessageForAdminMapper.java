@@ -10,7 +10,7 @@ import java.time.LocalDate;
 @Mapper(componentModel = "spring", imports = LocalDate.class)
 public interface MessageForAdminMapper {
 
-    MessageForAdminResponseDto map(MessageForAdmin messageForAdmin);
-
-    MessageForAdmin map(SaveMessageForAdminDto messageForAdminDto);
+//    MessageForAdminResponseDto map(MessageForAdmin messageForAdmin);
+//
+//    MessageForAdmin map(SaveMessageForAdminDto messageForAdminDto);
 }

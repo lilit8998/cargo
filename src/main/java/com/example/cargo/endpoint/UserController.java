@@ -9,6 +9,7 @@ import com.example.cargo.security.SpringUser;
 import com.example.cargo.service.UserService;
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -18,9 +19,11 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
+import java.util.UUID;
 
 @Controller
 @RequestMapping("/user")
+@Slf4j
 public class UserController {
     private final UserService userService;
 
@@ -39,13 +42,13 @@ public class UserController {
     }
 
     @GetMapping("/account")
-    public String userAccount(@AuthenticationPrincipal SpringUser user, ModelMap model) {
+    public String userAccount(@AuthenticationPrincipal SpringUser user, Model model) {
         model.addAttribute("user", user);
         return "user/account";
     }
 
     @GetMapping("/registration")
-    public String userRegisterPage(@RequestParam(value = "msg", required = false) String msg, ModelMap modelMap) {
+    public String userRegisterPage(@RequestParam(value = "msg", required = false) String msg, Model modelMap) {
         if (msg != null && !msg.isEmpty()) {
             modelMap.addAttribute("msg", msg);
         }
@@ -56,7 +59,7 @@ public class UserController {
     @PostMapping("/registration")
     public String userRegister(@Valid @ModelAttribute("user") UserDto userDto,
                                BindingResult result, Model model) {
-
+        String token = UUID.randomUUID().toString();
         if (result.hasErrors()) {
             return "registration";
         }
@@ -66,20 +69,18 @@ public class UserController {
         }
 
         User user = userMapper.map(userDto);
-        String encodedPassword = passwordEncoder.encode(userDto.getPassword());
-        user.setName(userDto.getName());
-        user.setSurname(userDto.getSurname());
-        user.setEmail(userDto.getEmail());
-        user.setPhone(userDto.getPhone());
-        user.setPassword(encodedPassword);
-        user.setDob(userDto.getDob());
-        user.setUserRole(UserRole.USER);
 
+        String encodedPassword = passwordEncoder.encode(userDto.getPassword());
+        user.setPassword(encodedPassword);
+        user.setUserRole(UserRole.USER);
+        user.setToken(token);
         try {
-            userService.save(user);
+            userService.register(user);
             model.addAttribute("msg", "User has been registered successfully.");
+            log.info("User with {} email has been registered successfully", user.getEmail());
             return "redirect:/user/registration";
         } catch (Exception e) {
+            log.error("User with {} email registered successfully", user.getEmail());
             model.addAttribute("msg", e.getMessage());
             return "redirect:/user/registration";
         }
@@ -90,6 +91,7 @@ public class UserController {
         if (springUser == null) {
             return "loginPage";
         } else {
+            log.info("User {} logged in successfully", springUser.getUsername());
             return "redirect:/account";
         }
     }
@@ -114,6 +116,7 @@ public class UserController {
             User user = userOptional.get();
             userRepository.delete(user);
             session.invalidate();
+            log.info("User with id {} deleted successfully", id);
             return "redirect:/";
         } else {
 
@@ -133,10 +136,11 @@ public class UserController {
     }
 
     @PostMapping("/update")
-    public String updateUser(@ModelAttribute User updatedUser, ModelMap model) {
+    public String updateUser(@ModelAttribute User updatedUser, Model model) {
         try {
             UserDto userDto = convertUserToDto(updatedUser);
             userService.updateUser(userDto);
+            log.info("User updated successfully");
             return "redirect:/user/account?msg=User updated";
         } catch (IllegalArgumentException e) {
             model.addAttribute("error", e.getMessage());
@@ -155,6 +159,24 @@ public class UserController {
         userDto.setEmail(user.getEmail());
         userDto.setPhone(user.getPhone());
         return userDto;
+    }
+
+    @GetMapping("/verify")
+    public String verifyUser(@RequestParam("token") String token, Model model) {
+        User byToken = userService.findByToken(token);
+        if (byToken == null) {
+            model.addAttribute("msg", "Invalid token");
+            return "redirect:/";
+        }
+        if (byToken.isActive()) {
+            log.error("user already activated! {}", byToken.getEmail());
+            model.addAttribute("msg", "User already activated!");
+        }
+        byToken.setActive(true);
+        byToken.setToken(null);
+        model.addAttribute("successMessage", "User verified!");
+        userService.save(byToken);
+        return "redirect:/";
     }
 
     @GetMapping("/admin/home")

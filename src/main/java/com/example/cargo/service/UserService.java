@@ -23,4 +23,8 @@ public interface UserService {
     boolean isEmailExists(String email);
 
     User updateUser(UserDto user) throws IOException;
+
+    User findByToken(String token);
+
+    User register(User user);
 }
