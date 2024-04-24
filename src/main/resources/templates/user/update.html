@@ -47,44 +47,28 @@
                     </div>
 
                 </div>
-                <div class="title">
-                    <h1>Registration</h1>
-                    <p>Have an account? <a th:href="@{/user/loginPage}">Login</a></p>
-                </div>
-                <span th:if="${msg != null and msg != ''}" th:text="${msg}" style="color: red"></span>
-
-                <form th:method="POST" th:action="@{/user/registration}" th:object="${user}">
+                <form th:action="@{/user/update}" th:object="${user}" method="post">
+                    <input type="hidden" th:field="*{id}"/>
                     <div>
-                        <input th:field="*{name}" type="text" name="name" placeholder="Name" required/>
-                        <span th:if="${#fields.hasErrors('name')}" th:errors="*{name}" th:errorclass="error"></span>
+                        <label>Name:</label>
+                        <input type="text" th:field="*{name}" required/>
                     </div>
                     <div>
-                        <input th:field="*{surname}" type="text" name="surname" placeholder="Surname" required/>
-                        <span th:if="${#fields.hasErrors('surname')}" th:errors="*{surname}"
-                              th:errorclass="error"></span>
+                        <label>Surname:</label>
+                        <input type="text" th:field="*{surname}" required/>
                     </div>
                     <div>
-                        <input th:field="*{email}" type="email" name="email" placeholder="Email" required />
-                        <span th:if="${#fields.hasErrors('email')}" th:errors="*{email}" th:errorclass="error"></span>
+                        <label>Email:</label>
+                        <input type="email" th:field="*{email}" required/>
                     </div>
                     <div>
-                        <input th:field="*{phone}" type="text" name="phone" placeholder="Phone" required/>
-                        <span th:if="${#fields.hasErrors('phone')}" th:errors="*{phone}" th:errorclass="error"></span>
+                        <label>Phone:</label>
+                        <input type="text" th:field="*{phone}" required/>
                     </div>
                     <div>
-                        <input th:field="*{dob}" type="date" name="dob" placeholder="Date of birth" required/>
-                        <span th:if="${#fields.hasErrors('dob')}" th:errors="*{dob}" th:errorclass="error"></span>
                     </div>
-                    <div>
-                        <input th:field="*{password}" type="password" name="password" placeholder="Password" required/>
-                        <span th:if="${#fields.hasErrors('password')}" th:errors="*{password}" th:errorclass="error"></span>
-                    </div>
-
-                    <input type="submit" class="button" value="Register"/>
+                    <input type="submit" value="Update">
                 </form>
-            </div>
-            <div class="background">
-                <img src="/img/s.jpg">
             </div>
 
         </div>

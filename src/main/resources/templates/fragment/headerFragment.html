@@ -24,6 +24,7 @@
                 <li><a th:if="${currentUser == null}" th:href="@{/user/registration}" th:text="#{registration}">Registration</a>
                 </li>
                 <li><a th:if="${currentUser == null}" th:href="@{/user/loginPage}" th:text="#{login}">Login</a></li>
+                <li><a th:if="${currentUser != null}" th:href="@{/user/account}" th:text="#{account}">Account</a></li>
                 <li th:if="${currentUser != null}"><a th:href="@{/logout}" th:text="#{logout}">Logout</a></li>
             </ul>
 

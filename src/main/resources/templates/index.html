@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <title>GoCargo - Freight, Logistics & Transportation Website Template</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="widheader.cloneth=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="">
 
@@ -15,17 +15,17 @@
 <body>
 <div id="preloader"></div>
 <div id="wrapper">
-
-    <!-- header begin -->
-    <header>
+    <header style="background-color: #1f242e">
         <div class="container">
             <span id="menu-btn"></span>
 
             <div class="row">
-                <div th:block th:include="~{/fragment/headerFragment::siteMenu}"></div>
+                <div th:block data-th-insert="~{/fragment/headerFragment::siteMenu}"></div>
             </div>
         </div>
     </header>
+</div>
+
     <!-- header close -->
 
     <!-- content begin -->
@@ -51,30 +51,7 @@
         </section>
         <!-- section close -->
 
-        <!-- section begin -->
-        <section id="section-track" class="no-padding light-text">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-9">
-                        <div class="row">
-                            <div class="col-md-7 no-padding">
-                                <div class="inner">
-                                    <h3>Track &amp; Trace</h3>
-                                    <span>Already have a load ID, please insert it below</span>
-                                </div>
-                            </div>
-                            <div class="col-md-5 no-padding">
-                                <input class="input-fullwidth" name="track" id="track">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-3">
-                        <a id="track-it" href="#section-tracking-result" class="btn-custom btn-fullwidth">Track it</a>
-                    </div>
-                </div>
-            </div>
-        </section>
-        <!-- section close -->
+
 
         <!-- section begin -->
         <section id="section-tracking-result" class="light-text no-margin">
@@ -532,9 +509,8 @@
     <!-- content close -->
 
     <!-- footer begin -->
-    <div th:block th:include="~{/fragment/footerFragment::footerMenu}"></div>
+    <div th:block data-th-insert="~{/fragment/footerFragment::footerMenu}"></div>
     <!-- footer close -->
-</div>
 
 <!-- LOAD JS FILES -->
 <script src="../js/jquery.min.js"></script>

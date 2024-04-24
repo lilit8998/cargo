@@ -11,4 +11,6 @@ spring:
     change-log: classpath:liquibase/db/change-log.xml
     enabled: true
 
-
+  mvc:
+    validation:
+      enabled: true
