@@ -48,4 +48,5 @@ public class UserDto {
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date dob;
 
+    private String token;
 }

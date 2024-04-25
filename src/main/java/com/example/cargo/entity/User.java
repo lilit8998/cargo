@@ -52,4 +52,5 @@ public class User {
     @Column(name = "role")
     private UserRole userRole = UserRole.USER;
 
+    private String token;
 }
