@@ -22,7 +22,7 @@ spring:
       root: info
       am.itspace: debug
     file:
-      name: C:\Users\Lenovo\IdeaProjects\cargo\log\
+      name: "#{systemProperties['user.home']}/cargo/log/"
     logback:
       rollingpolicy:
         max-file-size: 1MB
