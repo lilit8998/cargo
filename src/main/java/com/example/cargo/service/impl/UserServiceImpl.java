@@ -70,7 +70,11 @@ public class UserServiceImpl implements UserService {
         if (userId == null) {
             throw new IllegalArgumentException("User ID cannot be null");
         }
-        User existingUser = userRepository.findById(userId);
+        Optional<User> userOptional = userRepository.findById(userId);
+        if (userOptional.isEmpty()) {
+            throw new IllegalArgumentException("User not found with ID: " + userId);
+        }
+        User existingUser = userOptional.get();
         userMapper.updateUserFromDto(userDto, existingUser);
         if (userDto.getPassword() != null && !userDto.getPassword().isEmpty()) {
             String encodedPassword = userDto.getPassword();
