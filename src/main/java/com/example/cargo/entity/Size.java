@@ -16,4 +16,5 @@ public class Size {
     private int height;
     private int depth;
     private int weight;
+    private double price;
 }

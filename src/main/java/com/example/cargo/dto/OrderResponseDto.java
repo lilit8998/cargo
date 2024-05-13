@@ -21,6 +21,8 @@ public class OrderResponseDto {
     private long id;
     private LocalDateTime sendDate;
     private LocalDateTime deliveredDate;
+    private double price;
+    private double priceUSD;
     private OrderStatus orderStatus;
     private String orderLocation;
     private Transport transportType;
