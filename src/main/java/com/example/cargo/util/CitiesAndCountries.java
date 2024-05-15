@@ -17,7 +17,7 @@ import org.springframework.web.client.RestTemplate;
 @Component
 @RequiredArgsConstructor
 @Slf4j
-public class GetCityAndCountry {
+public class CitiesAndCountries {
 
     @Value("${api.url}")
     private String apiUrl;

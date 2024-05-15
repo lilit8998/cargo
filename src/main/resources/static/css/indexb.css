@@ -161,11 +161,10 @@ form .button {
 .background img {
 	background-size: cover;
 	background-repeat: no-repeat;
-	width: 115%;
-	height: 110%;
+	width: 80%;
+	height: 75%;
 	margin-left: -130px;
 }
-
 input {
             margin-top: 10px;
             text-align: center;

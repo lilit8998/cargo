@@ -23,18 +23,13 @@ public class CityServiceImpl implements CityService {
     @Transactional
     public CityResponseDto save(SaveCityDto saveCityDto) {
         City city = cityMapper.map(saveCityDto);
-        return cityMapper.map(cityRepository.save(city));
+        return cityMapper.cityToCityResponseDto(cityRepository.save(city));
     }
 
     @Override
     @Transactional(readOnly = true)
     public List<CityResponseDto> getAll() {
-        List<City> all = cityRepository.findAll();
-        List<CityResponseDto> cityResponseDto = new ArrayList<>();
-        for (City city : all) {
-            cityResponseDto.add(cityMapper.map(city));
-        }
-        return cityResponseDto;
+        return cityMapper.cityListToCityResponseDtoList(cityRepository.findAll());
     }
 
     @Override
@@ -44,7 +39,7 @@ public class CityServiceImpl implements CityService {
         if (city == null) {
             return null;
         }
-        return cityMapper.map(city);
+        return cityMapper.cityToCityResponseDto(city);
     }
 
     @Override
@@ -52,5 +47,11 @@ public class CityServiceImpl implements CityService {
     public void deleteById(int id) {
         cityRepository.deleteById(id);
     }
+
+    @Override
+    public List<City> getCitiesByCountry(int countryId) {
+        return cityRepository.findByCountry_Id(countryId);
+    }
+
 
 }

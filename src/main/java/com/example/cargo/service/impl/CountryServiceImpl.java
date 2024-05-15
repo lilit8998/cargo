@@ -25,17 +25,12 @@ public class CountryServiceImpl implements CountryService {
     @Transactional(propagation = Propagation.REQUIRED, isolation = Isolation.SERIALIZABLE)
     public CountryResponseDto save(SaveCountryDto saveCountryDto) {
         Country country = countryMapper.map(saveCountryDto);
-        return countryMapper.map(countryRepository.save(country));
+        return countryMapper.countryToCountryResponseDto(countryRepository.save(country));
     }
 
     @Override
     public List<CountryResponseDto> getAll() {
-        List<Country> all = countryRepository.findAll();
-        List<CountryResponseDto> countryResponseDto = new ArrayList<>();
-        for (Country country : all) {
-            countryResponseDto.add(countryMapper.map(country));
-        }
-        return countryResponseDto;
+        return countryMapper.countryListToCountryResponseDtoList(countryRepository.findAll());
     }
 
     @Override
@@ -44,7 +39,7 @@ public class CountryServiceImpl implements CountryService {
         if (country == null) {
             return null;
         }
-        return countryMapper.map(country);
+        return countryMapper.countryToCountryResponseDto(country);
     }
 
     @Override
@@ -52,4 +47,5 @@ public class CountryServiceImpl implements CountryService {
     public void deleteById(int id) {
         countryRepository.deleteById(id);
     }
+
 }

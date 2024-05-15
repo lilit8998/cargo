@@ -12,26 +12,22 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
     <link rel="shortcut icon" href="img/Transportation-16x16.png" type="image/x-icon">
-    <link rel="stylesheet" type="text/css" href="/static/css/indexRegistb.css">
+    <link href="/css/main.css" rel="stylesheet" type="text/css">
+    <link href='/static/css/fullcalendar.css' rel='stylesheet'/>
+    <link href='/static/css/fullcalendar.print.css' rel='stylesheet' media='print'/>
+    <link rel="stylesheet" type="text/css" href="/css/indexRegistb.css">
 </head>
 <body>
-<div id="preloader"></div>
+
 <div id="wrapper">
-    <header>
-        <div class="container">
-            <span id="menu-btn"></span>
-            <div class="row">
-                <div th:block th:include="~{/fragment/headerFragment::siteMenu}"></div>
-            </div>
-        </div>
-    </header>
+
 </div>
 <div class="flex-container">
     <div class="main-container">
         <div class="login">
             <div class="header">
                 <div class="logo">
-                    <img src="/static/img/logo-2.png" alt="logo">
+                    <img src="/img/logo-2.png" alt="logo">
                 </div>
             </div>
             <div class="title">
@@ -40,9 +36,21 @@
             </div>
             <span th:if="${msg != null}" th:text="${msg}" style="color: red"></span>
 
-            <form method="POST" action="/branch/register" >
+            <form method="POST" th:action="@{/branch/registrationBranch}" th:object="${branch}">
                 <div>
-                    <input type="text" id="address" name="address" placeholder="Address" />
+                    <select  style="border-radius: 25px" onchange="getCities()" class="form-control" id="countrySelect"
+                            name="country">
+                        <option th:each="country : ${countries}" th:value="${country.id}"
+                                th:text="${country.name}"></option>
+                    </select>
+                    <div id="citiesContainer" >
+                        <select style="border-radius: 25px" name="city" id="citySelect" class="form-control">
+                        </select>
+                    </div>
+                </div>
+
+                <div>
+                    <input type="text" id="street" name="street" placeholder="Sreet" />
                 </div>
                 <div>
                     <input type="text" id="email" name="email" placeholder="Email" />
@@ -55,12 +63,33 @@
             </form>
         </div>
         <div class="background">
-            <img src="/static/img/bg.jpg">
+            <img src="/img/bg.jpg">
         </div>
-
     </div>
 
         </div>
         <div th:block th:include="~{/fragment/footerFragment::footerMenu}"></div>
+<script>
+    function getCities() {
+        var countryId = $("#countrySelect").val();
+        $.ajax({
+            type: "GET",
+            url: "/cities",
+            data: {countryId: countryId},
+            dataType: "json",
+            success: function (cities) {
+                console.log(cities);
+                $("#citySelect").empty();
+                $.each(cities, function (index, city) {
+                    $("#citySelect").append('<option value="' + city.id + '">' + city.name + '</option>');
+                });
+                $("#citiesContainer").append(citySelect);
+            }
+        });
+
+    }
+</script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
 </body>
 </html>
