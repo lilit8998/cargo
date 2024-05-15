@@ -14,7 +14,6 @@ public interface CityMapper {
     CityResponseDto cityToCityResponseDto(City city);
     List<CityResponseDto> cityListToCityResponseDtoList(List<City> cities);
 
-
     City map(SaveCityDto saveCityDto);
 
 }
