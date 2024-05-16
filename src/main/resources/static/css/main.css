@@ -37,14 +37,14 @@ Version:	1.0
 
 .price {
     color: #fff;
-    width: 162px;
+    width: 1170px;
     height: 46px;
     text-align: center;
     padding: 9px;
     position: relative;
-    top: 195px;
+    top: 240px;
     border: none;
-    background: rgba(255, 255, 255, .2)
+    background: rgba(255, 255, 255, .2);
 }
 
 @media (min-width: 992px)
