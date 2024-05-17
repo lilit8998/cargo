@@ -7,6 +7,8 @@ import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
 
+import java.util.Map;
+
 @Service
 public class EmailServiceImpl implements EmailService {
 
@@ -29,6 +31,23 @@ public class EmailServiceImpl implements EmailService {
             mailSender.send(message);
         } catch (MessagingException e) {
             throw new RuntimeException("Failed to send email", e);
+        }
+    }
+
+    @Override
+    public boolean sendEmail(Map<String, String> emailDetails) {
+        try {
+            String name = emailDetails.get("name");
+            String email = emailDetails.get("email");
+            String message = emailDetails.get("message");
+
+            String subject = "New Message from Contact Form";
+            String text = "Name: " + name + "\nEmail: " + email + "\nMessage: " + message;
+
+            sendEmail("cargo9088@gmail.com", subject, text);
+            return true;
+        } catch (Exception e) {
+            return false;
         }
     }
 }
