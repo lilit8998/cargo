@@ -14,7 +14,10 @@ spring:
           auth: true
           starttls:
             enable: true
-          default-encoding: UTF-8
+          connectiontimeout: 5000
+          timeout: 5000
+          writetimeout: 5000
+          debug: true
   jpa:
     hibernate:
       ddl-auto: none
