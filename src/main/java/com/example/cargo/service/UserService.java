@@ -1,7 +1,9 @@
 package com.example.cargo.service;
 
+import com.example.cargo.dto.UserDto;
 import com.example.cargo.entity.User;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 
@@ -19,4 +21,10 @@ public interface UserService {
     String getMessage(String msg);
 
     boolean isEmailExists(String email);
+
+    User updateUser(UserDto user) throws IOException;
+
+    User findByToken(String token);
+
+    User register(User user);
 }

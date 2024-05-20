@@ -16,16 +16,16 @@
 <body>
 <div id="preloader"></div>
 <div id="wrapper">
-    <!-- header begin -->
-    <header>
+    <header style="background-color: #1f242e">
         <div class="container">
             <span id="menu-btn"></span>
 
             <div class="row">
-                <div th:block th:include="~{/fragment/headerFragment::siteMenu}"></div>
+                <div th:block data-th-insert="~{/fragment/headerFragment::siteMenu}"></div>
             </div>
         </div>
     </header>
+</div>
     <!-- header close -->
 
     <!-- subheader begin -->
@@ -101,11 +101,11 @@
             </div>
         </div>
     </div>
-</div>
+
 <!-- content close -->
 
 <!-- footer begin -->
-<div th:block th:include="~{/fragment/footerFragment::footerMenu}"></div>
+<div th:block data-th-insert="~{/fragment/footerFragment::footerMenu}"></div>
 <!-- footer close -->
 </div>
 

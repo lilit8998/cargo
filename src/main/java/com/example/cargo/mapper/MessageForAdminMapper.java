@@ -8,7 +8,7 @@ import org.mapstruct.Mapper;
 @Mapper(componentModel = "spring")  
 public interface MessageForAdminMapper {
 
-    MessageForAdminResponseDto map(MessageForAdmin messageForAdmin);
-
-    MessageForAdmin map(SaveMessageForAdminDto messageForAdminDto);
+//    MessageForAdminResponseDto map(MessageForAdmin messageForAdmin);
+//
+//    MessageForAdmin map(SaveMessageForAdminDto messageForAdminDto);
 }

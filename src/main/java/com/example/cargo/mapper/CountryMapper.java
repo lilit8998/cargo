@@ -4,6 +4,7 @@ import com.example.cargo.dto.CountryResponseDto;
 import com.example.cargo.dto.SaveCountryDto;
 import com.example.cargo.entity.Country;
 import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
 import org.mapstruct.NullValuePropertyMappingStrategy;
 
 import java.util.List;

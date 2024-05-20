@@ -159,8 +159,9 @@ form .button {
 	background-size: cover;
 	background-repeat: no-repeat;
 	width: 115%;
-	height: 110%;
+	height: 80%;
 	margin-left: -130px;
+	margin-top: 28px;
 }
 
 input {
