@@ -3,14 +3,11 @@ package com.example.cargo.endpoint;
 import com.example.cargo.dto.BranchSaveDto;
 import com.example.cargo.dto.CityResponseDto;
 import com.example.cargo.dto.CountryResponseDto;
-import com.example.cargo.entity.Branch;
-import com.example.cargo.security.SpringBranch;
 import com.example.cargo.service.BranchService;
 import com.example.cargo.service.CityService;
 import com.example.cargo.service.CountryService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -59,13 +56,13 @@ public class BranchController {
         return "redirect:/branch/registrationBranch";
     }
 
-    @GetMapping("/loginBranch")
-    public String loginPage(@AuthenticationPrincipal SpringBranch springBranch) {
-        if (springBranch == null) {
-            return "loginBranch";
-        }
-        return "redirect:/loginBranch";
-    }
+//    @GetMapping("/loginBranch")
+//    public String loginPage(@AuthenticationPrincipal SpringBranch springBranch) {
+//        if (springBranch == null) {
+//            return "loginBranch";
+//        }
+//        return "redirect:/loginBranch";
+//    }
 //
 //    @GetMapping("/loginSuccess")
 //    public String loginSuccess(@AuthenticationPrincipal SpringBranch springBranch) {
