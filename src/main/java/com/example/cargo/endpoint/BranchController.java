@@ -56,22 +56,4 @@ public class BranchController {
         return "redirect:/branch/registrationBranch";
     }
 
-//    @GetMapping("/loginBranch")
-//    public String loginPage(@AuthenticationPrincipal SpringBranch springBranch) {
-//        if (springBranch == null) {
-//            return "loginBranch";
-//        }
-//        return "redirect:/loginBranch";
-//    }
-//
-//    @GetMapping("/loginSuccess")
-//    public String loginSuccess(@AuthenticationPrincipal SpringBranch springBranch) {
-//        Branch branch = springBranch.getBranch();
-//        return "redirect:/branch/home";
-//    }
-//
-//    @GetMapping("/branch/home")
-//    public String branchHomePage() {
-//        return "/branch/branchHome";
-//    }
 }
