@@ -60,8 +60,11 @@
             <div class="col-md-6">
                 <div id="contact-form-wrapper">
                     <div class="contact_form_holder">
-                        <form id="contact" class="row" name="sendEmail" th:method="post" th:action="@{/send-email}">
-                            <input type="text" class="form-control" name="name" id="name" placeholder="Your name">
+                        <form id="contactMail" class="row" name="contactMail" th:method="POST"
+                              th:action="@{/send-email}">
+
+                            <div id="error_name" class="error">Please check your name</div>
+                            <input type="text" class="form-control" name="name" id="name" placeholder="Your name"/>
 
                             <div id="error_email" class="error">Please check your email</div>
                             <input type="text" class="form-control" name="email" id="email"
@@ -75,9 +78,10 @@
                             <div id="mail_failed" class="error">Error, email not sent</div>
 
                             <p id="btnsubmit">
-                                <input type="submit" id="send" value="Send" class="btn btn-custom">
+                                <input type="submit" id="send" value="Send" class="btn btn-custom"
+                                       onclick="sendEmail()">
                             </p>
-
+                            <p id="response-message"></p>
 
                         </form>
                     </div>
@@ -160,20 +164,61 @@
 <div th:block data-th-insert="~{/fragment/footerFragment::footerMenu}"></div>
 <!-- footer close -->
 
-<!-- LOAD JS FILES -->
-<script src="js/jquery.min.js"></script>
-<script src="js/bootstrap.min.js"></script>
-<script src="js/jquery.isotope.min.js"></script>
-<script src="js/easing.js"></script>
-<script src="js/jquery.ui.totop.js"></script>
-<script src="js/selectnav.js"></script>
-<script src="js/ender.js"></script>
-<script src="js/owl.carousel.js"></script>
-<script src="js/jquery.fitvids.js"></script>
-<script src="js/jquery.plugin.js"></script>
-<script src="js/wow.min.js"></script>
-<script src="js/jquery.magnific-popup.min.js"></script>
-<script src="js/tweecool.js"></script>
+<script>
+    function sendEmail() {
+        var r = new XMLHttpRequest();
+        var url = "/email-send";
+        var nameuser = document.getElementById('name').value;
+        var email = document.getElementById('email').value;
+        var message = document.getElementById('message').value;
+        var button = document.getElementById('send');
+
+        button.value = "Sending...";
+        r.open("POST", url, true);
+        r.setRequestHeader("Content-Type", "application/json");
+
+        r.onreadystatechange = function () {
+            if (r.readyState === 4) {
+                if (r.status === 200) {
+                    var response = JSON.parse(r.responseText);
+                    if (response.success) {
+                        document.getElementById('response-message').innerText = "Email sent";
+                        button.value = "Sent";
+
+                    } else {
+                        console.error("Failed to send email.");
+                        document.getElementById('response-message').innerText = "Error, email not sent";
+
+                    }
+                } else {
+                    document.getElementById('response-message').innerText = "Error occurred while sending email: " + r.statusText;
+
+                }
+            }
+        };
+
+        var formData = {
+            name: nameuser,
+            email: email,
+            message: message
+        };
+
+        r.send(JSON.stringify(formData));
+    }
+
+    document.getElementById('contactMail').addEventListener('submit', sendEmail);
+</script>
+<script src="/js/jquery.min.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/jquery.isotope.min.js"></script>
+<script src="/js/easing.js"></script>
+<script src="/js/jquery.ui.totop.js"></script>
+<script src="/js/ender.js"></script>
+<script src="/js/owl.carousel.js"></script>
+<script src="/js/jquery.fitvids.js"></script>
+<script src="/js/jquery.plugin.js"></script>
+<script src="/js/jquery.magnific-popup.min.js"></script>
+<script src="/js/tweecool.js"></script>
 <script src="js/instafeed.min.js"></script>
 <script src="js/jquery.stellar.js"></script>
 <script src="js/typed.js"></script>
@@ -185,45 +230,6 @@
 <script src="js/contact.js"></script>
 <script src="../maps/api/js?v=3.exp"></script>
 <script src="js/map.js"></script>
-<script>
-    document.getElementById('contact').addEventListener('submit', function (event) {
-        event.preventDefault();
 
-        const formData = {
-            name: document.getElementById('name').value,
-            email: document.getElementById('email').value,
-            message: document.getElementById('message').value
-        };
-
-        const btnSubmit = document.getElementById('btnsubmit');
-        btnSubmit.innerHTML = 'Loading...';
-
-        fetch('http://localhost:8080/send-email', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(formData)
-        })
-            .then(response => response.json())
-            .then(data => {
-                if (data.success) {
-                    document.getElementById('mail_success').style.display = 'block';
-                    document.getElementById('mail_failed').style.display = 'none';
-                } else {
-                    document.getElementById('mail_success').style.display = 'none';
-                    document.getElementById('mail_failed').style.display = 'block';
-                }
-            })
-            .catch(error => {
-                document.getElementById('mail_success').style.display = 'none';
-                document.getElementById('mail_failed').style.display = 'block';
-                console.error('Error:', error);
-            })
-            .finally(() => {
-                btnSubmit.innerHTML = '<input type="submit" id="send" value="Send" class="btn btn-custom">';
-            });
-    });
-</script>
 </body>
 </html>
