@@ -7,6 +7,8 @@ import com.example.cargo.mapper.NewsMapper;
 import com.example.cargo.repository.NewsRepository;
 import com.example.cargo.service.NewsService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Propagation;
@@ -14,6 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -38,12 +41,14 @@ public class NewsServiceImpl implements NewsService {
         return newsResponseDto;
     }
 
-    public NewsResponseDto findNewsById(int id) {
-        News news = newsRepository.findById(id).orElse(null);
-        return newsRepository.findById(id)
-                .map(newsMapper::map)
-                .orElse(new NewsResponseDto());
+    @Override
+    public Optional<News> findNewsById(int id) {
+        return newsRepository.findById(id);
+    }
 
+    @Override
+    public Page<News> findAll(Pageable pageable) {
+        return newsRepository.findAll(pageable);
     }
 
     @Override

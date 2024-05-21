@@ -14,5 +14,6 @@ public class SaveNewsDto {
     private String title;
     private String description;
     private LocalDate publishDate;
+    private String picName;
 
 }
