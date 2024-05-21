@@ -28,7 +28,6 @@ public class SecurityConfig {
                 .authorizeHttpRequests(authorizationManagerRequestMatcherRegistry
                         -> authorizationManagerRequestMatcherRegistry
                         .requestMatchers("/").permitAll()
-                        .requestMatchers("/news/**").permitAll()
                         .requestMatchers("/user/registration").permitAll()
                         .requestMatchers("/loginPage").permitAll()
                         .requestMatchers("/gallery").permitAll()
