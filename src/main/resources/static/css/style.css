@@ -4414,11 +4414,14 @@ control nav
     -moz-border-radius: 2px;
     -webkit-border-radius: 2px;
 
+
     -webkit-box-shadow: none !important;
     -moz-box-shadow: none !important;
     box-shadow: none !important;
 }
-
+.city-delivery{
+    margin-left: 600px;
+}
 .pull-left {
     margin: 0 20px 0 0;
 }
