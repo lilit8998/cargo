@@ -1,7 +1,6 @@
 package com.example.cargo.security;
 
 import com.example.cargo.entity.User;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.authority.AuthorityUtils;
 
 public class SpringUser extends org.springframework.security.core.userdetails.User {

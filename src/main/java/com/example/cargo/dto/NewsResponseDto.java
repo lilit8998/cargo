@@ -17,4 +17,5 @@ public class NewsResponseDto {
     private String title;
     private String description;
     private LocalDate publishDate;
+    private String picName;
 }
