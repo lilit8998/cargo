@@ -20,7 +20,10 @@ spring:
           debug: true
   jpa:
     hibernate:
-      ddl-auto: none
+      ddl-auto: update
+    properties:
+      hibernate:
+        format_sql: true
   logging:
     level:
       root: info
@@ -37,3 +40,5 @@ spring:
   mvc:
     validation:
       enabled: true
+
+

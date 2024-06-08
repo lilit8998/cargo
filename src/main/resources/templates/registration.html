@@ -79,7 +79,8 @@
                         <input th:field="*{password}" type="password" name="password" placeholder="Password" required/>
                         <span th:if="${#fields.hasErrors('password')}" th:errors="*{password}" th:errorclass="error"></span>
                     </div>
-
+                        <span style="font-size:12px">* Password must contain at least 1 uppercase, <br>1 lowercase, 1 special character, <br> and 1 digit</span><br>
+                        <span style="font-size:12px">* Password size must be between 6 and 16</span>
                     <input type="submit" class="button" value="Register"/>
                 </form>
             </div>

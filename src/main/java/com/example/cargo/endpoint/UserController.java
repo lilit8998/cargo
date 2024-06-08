@@ -126,7 +126,7 @@ public class UserController {
 
     @GetMapping("/update/{id}")
     public String updateForm(@PathVariable("id") long id, ModelMap model) {
-        Optional<Object> userOptional = userService.findById(id);
+        Optional<User> userOptional = userService.findById(id);
         if (userOptional.isPresent()) {
             model.addAttribute("user", userOptional.get());
             return "user/update";

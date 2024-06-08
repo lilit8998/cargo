@@ -26,33 +26,46 @@ public class CalculateController {
 
     @PostMapping("/calculate")
     public String calculateDistances(@ModelAttribute("calculate") CalculateDto calculateDto,
-                                    BindingResult bindingResult,
-                                    Model model) {
+                                     BindingResult bindingResult,
+                                     Model model) {
         if (bindingResult.hasErrors()) {
             return "calculate";
         }
-        if (calculateDto.getCityFrom().isEmpty() || calculateDto.getCityTo().isEmpty() || calculateDto.getParcelSize().isEmpty()) {
+
+        if (calculateDto.getCityFrom().isEmpty() || calculateDto.getCityTo().isEmpty() ||
+                calculateDto.getParcelSize().isEmpty()) {
             model.addAttribute("errorMessage", "Form fields cannot be empty.");
             return "calculate";
         }
-        System.out.println("calculate distance");
 
         String[] cityFromCoords = calculateDto.getCityFrom().split(",");
         String[] cityToCoords = calculateDto.getCityTo().split(",");
 
-        double lat1 = Double.parseDouble(cityFromCoords[0]);
-        double lon1 = Double.parseDouble(cityFromCoords[1]);
-        double lat2 = Double.parseDouble(cityToCoords[0]);
-        double lon2 = Double.parseDouble(cityToCoords[1]);
+        if (cityFromCoords.length != 2 || cityToCoords.length != 2) {
+            model.addAttribute("errorMessage", "Invalid coordinates format.");
+            return "calculate";
+        }
 
-        double calculatedDistance = calculateService.calculateDistance(lat1, lon1, lat2, lon2);
+        try {
+            double lat1 = Double.parseDouble(cityFromCoords[0]);
+            double lon1 = Double.parseDouble(cityFromCoords[1]);
+            double lat2 = Double.parseDouble(cityToCoords[0]);
+            double lon2 = Double.parseDouble(cityToCoords[1]);
 
-        double parcelSize = calculateService.parseParcelSize(calculateDto.getParcelSize());
-        double basePrice = calculateService.calculatePrice(calculatedDistance, parcelSize);
+            double calculatedDistance = calculateService.calculateDistance(lat1, lon1, lat2, lon2);
 
-        model.addAttribute("totalPrice", (int) basePrice);
+            double parcelSize = calculateService.parseParcelSize(calculateDto.getParcelSize());
+            double basePrice = calculateService.calculatePrice(calculatedDistance, parcelSize);
 
+            model.addAttribute("totalPrice", (int) basePrice);
+
+        } catch (NumberFormatException e) {
+            model.addAttribute("errorMessage", "Invalid coordinate format.");
+            return "calculate";
+        }
+        System.out.println("calculate distance");
         return "calculate";
     }
+
 
 }

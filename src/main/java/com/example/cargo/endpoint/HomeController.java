@@ -29,7 +29,7 @@ public class HomeController {
 
     @GetMapping("/about")
     public String about() {
-        return "services";
+        return "about";
     }
 
     @GetMapping("/gallery")

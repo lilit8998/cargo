@@ -29,7 +29,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public Optional<Object> findById(Long id) {
+    public Optional<User> findById(Long id) {
         return Optional.of(userRepository.findById(id));
     }
 
@@ -39,13 +39,14 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void save(User user) {
+    public User save(User user) {
         userRepository.save(user);
+        return user;
     }
 
     @Override
     public void deleteById(Long id) {
-        userRepository.deleteById(id.intValue());
+        userRepository.deleteById(id);
     }
 
     @Override
