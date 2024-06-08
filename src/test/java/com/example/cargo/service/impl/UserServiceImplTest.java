@@ -2,7 +2,6 @@ package com.example.cargo.service.impl;
 
 import com.example.cargo.entity.User;
 import com.example.cargo.repository.UserRepository;
-import com.example.cargo.service.UserService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
@@ -14,7 +13,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
-import static java.util.Optional.*;
+import static java.util.Optional.of;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
@@ -31,6 +30,7 @@ class UserServiceImplTest {
     void setUp() {
         MockitoAnnotations.initMocks(this);
     }
+
     @Test
     void findById() {
         long userId = 1L;
@@ -55,33 +55,38 @@ class UserServiceImplTest {
 
     @Test
     void save() {
-        User user = new User();
+        User user = createUser("test@gmail.com", "name", "surname", "password");
+        user.setDob(new Date());
+
         when(userRepository.save(user)).thenReturn(user);
 
-        User saved = userService.save(user);
-
-        assertEquals(user, saved);
-        verify(userRepository,times(1)).save(user);
+        User savedUser = userService.save(user);
+        assertNotNull(savedUser);
+        assertEquals("name", savedUser.getName());
+        assertEquals("surname", savedUser.getSurname());
+        assertEquals("test@gmail.com", savedUser.getEmail());
+        assertEquals("password", savedUser.getPassword());
+        assertEquals(user.getDob(), savedUser.getDob());
     }
 
     @Test
     void deleteById() {
         long userId = 1L;
         userService.deleteById(userId);
-        verify(userRepository,times(1)).deleteById(userId);
+        verify(userRepository, times(1)).deleteById(userId);
     }
 
     @Test
     void findByEmail() {
         String email = "test@gmail.com";
-        User user = new User();
-        user.setEmail(email);
+        User user = findUserByEmail(email);
 
         when(userRepository.findByEmail(email)).thenReturn(of(user));
-        Optional<User> userFound = userService.findByEmail(email);
-        assertTrue(userFound.isPresent());
-        assertEquals(email, userFound.get().getEmail());
 
+        Optional<User> foundUser = userService.findByEmail(email);
+
+        assertNotNull(foundUser);
+        assertEquals(email, foundUser.get().getEmail());
     }
 
     @Test
@@ -136,5 +141,20 @@ class UserServiceImplTest {
         user.setSurname("surname");
         user.setDob(new Date());
         when(userRepository.save(user)).thenReturn(user);
+    }
+
+    private User createUser(String name, String email, String surname, String password) {
+        User user = new User();
+        user.setEmail(email);
+        user.setPassword(password);
+        user.setName(name);
+        user.setSurname(surname);
+        return user;
+    }
+
+    private User findUserByEmail(String emailUser) {
+        User user = new User();
+        user.setEmail(emailUser);
+        return user;
     }
 }

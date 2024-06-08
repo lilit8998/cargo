@@ -2,6 +2,7 @@ package com.example.cargo.endpoint;
 
 import com.example.cargo.dto.CalculateDto;
 import com.example.cargo.service.CalculateService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
+@Slf4j
 public class CalculateController {
 
     private final CalculateService calculateService;
@@ -32,8 +34,7 @@ public class CalculateController {
             return "calculate";
         }
 
-        if (calculateDto.getCityFrom().isEmpty() || calculateDto.getCityTo().isEmpty() ||
-                calculateDto.getParcelSize().isEmpty()) {
+        if (areFieldsEmpty(calculateDto)) {
             model.addAttribute("errorMessage", "Form fields cannot be empty.");
             return "calculate";
         }
@@ -47,10 +48,13 @@ public class CalculateController {
         }
 
         try {
-            double lat1 = Double.parseDouble(cityFromCoords[0]);
-            double lon1 = Double.parseDouble(cityFromCoords[1]);
-            double lat2 = Double.parseDouble(cityToCoords[0]);
-            double lon2 = Double.parseDouble(cityToCoords[1]);
+            double[] cityFrom = parseCoordinates(cityFromCoords);
+            double[] cityTo = parseCoordinates(cityToCoords);
+
+            double lat1 = cityFrom[0];
+            double lon1 = cityFrom[1];
+            double lat2 = cityTo[0];
+            double lon2 = cityTo[1];
 
             double calculatedDistance = calculateService.calculateDistance(lat1, lon1, lat2, lon2);
 
@@ -63,9 +67,22 @@ public class CalculateController {
             model.addAttribute("errorMessage", "Invalid coordinate format.");
             return "calculate";
         }
-        System.out.println("calculate distance");
+
+        log.info("calculate distance finished");
         return "calculate";
     }
 
+    private boolean areFieldsEmpty(CalculateDto calculateDto) {
+        return calculateDto.getCityFrom().isEmpty() ||
+                calculateDto.getCityTo().isEmpty() ||
+                calculateDto.getParcelSize().isEmpty();
+    }
+
+    private double[] parseCoordinates(String[] coords) throws NumberFormatException {
+        double[] parsedCoords = new double[2];
+        parsedCoords[0] = Double.parseDouble(coords[0]);
+        parsedCoords[1] = Double.parseDouble(coords[1]);
+        return parsedCoords;
+    }
 
 }
