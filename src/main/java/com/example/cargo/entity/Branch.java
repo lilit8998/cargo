@@ -26,4 +26,8 @@ public class Branch {
     private String email;
 
     private String password;
+
+    @ManyToOne
+    private User user;
+
 }

@@ -40,9 +40,6 @@ public class OrderServiceImpl implements OrderService {
         return orderResponseDto;
     }
 
-    public Product getByProduct(Long productId) {
-        return orderRepository.findByProductId(productId).orElse(null);
-    }
 
 
     public OrderResponseDto findOrdersById(Long id) {

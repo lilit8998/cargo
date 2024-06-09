@@ -35,9 +35,8 @@ public class Orders {
     @OneToOne
     private Payment payment;
 
-    @OneToOne
-    @JoinColumn(name = "product_id", referencedColumnName = "id")
-    private Product product;
+    @ManyToOne
+    private Branch branch;
 
 
 }
