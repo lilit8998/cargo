@@ -3,50 +3,27 @@
                    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
 
     <changeSet id="0004-orders-tb" author="lpoghosyan">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="orders"/>
+            </not>
+        </preConditions>
         <createTable tableName="orders">
             <column name="id" type="BIGINT" autoIncrement="true">
                 <constraints primaryKey="true"/>
             </column>
-            <column name="send_date" type="timestamp">
-                <constraints nullable="false"/>
-            </column>
-            <column name="delivered_date" type="timestamp">
-                <constraints nullable="false"/>
-            </column>
             <column name="price" type="decimal(8,8)">
                 <constraints nullable="false"/>
             </column>
-            <column name="order_status" type="ENUM('NEW','CANCELED','DELIVERED')">
-                <constraints nullable="false"/>
-            </column>
-            <column name="order_location" type="varchar(150)"/>
-            <column name="transport_type" type="int">
+            <column name="from" type="BIGINT">
                 <constraints nullable="true"/>
             </column>
-            <column name="from" type="BIGINT">
-                <constraints nullable="false"/>
-            </column>
             <column name="to" type="BIGINT">
-                <constraints nullable="false"/>
+                <constraints nullable="true"/>
             </column>
-            <column name="payment_id" type="BIGINT">
-                <constraints nullable="false"/>
-            </column>
-            <column name="product_id" type="BIGINT">
-                <constraints nullable="false"/>
+            <column name="parcelSize" type="varchar(50)">
+                <constraints nullable="true"/>
             </column>
         </createTable>
-        <addForeignKeyConstraint baseTableName="orders"
-                                 baseColumnNames="product_id"
-                                 constraintName="product_order"
-                                 referencedTableName="product"
-                                 referencedColumnNames="id"
-                                 onDelete="CASCADE"/>
-        <addForeignKeyConstraint baseTableName="orders"
-                                 baseColumnNames="payment_id"
-                                 constraintName="orders_payment"
-                                 referencedTableName="payment"
-                                 referencedColumnNames="id"
-                                 onDelete="CASCADE"/>
     </changeSet>
 </databaseChangeLog>

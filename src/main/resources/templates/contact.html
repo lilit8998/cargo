@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+﻿﻿<!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="utf-8">
@@ -101,7 +101,7 @@
             </div>
 
             <div class="col-md-3">
-                <h3>United States</h3>
+                <h3>Armenia,Yerevan</h3>
                 Somewhere Over Rainbow<br>
                 Green World Rainbow Green World<br>
                 T. 0908 1000 1000<br>
@@ -114,7 +114,7 @@
             </div>
 
             <div class="col-md-3">
-                <h3>Germany</h3>
+                <h3>Germany,Berlin</h3>
                 Somewhere Over Rainbow<br>
                 Green World Rainbow Green World<br>
                 T. 0908 1000 1000<br>
@@ -127,7 +127,7 @@
             </div>
 
             <div class="col-md-3">
-                <h3>Singapore</h3>
+                <h3>France,Paris</h3>
                 Somewhere Over Rainbow<br>
                 Green World Rainbow Green World<br>
                 T. 0908 1000 1000<br>
@@ -140,7 +140,7 @@
             </div>
 
             <div class="col-md-3">
-                <h3>Indonesia</h3>
+                <h3>Russia,Moscow</h3>
                 Somewhere Over Rainbow<br>
                 Green World Rainbow Green World<br>
                 T. 0908 1000 1000<br>
@@ -167,7 +167,7 @@
 <script>
     function sendEmail() {
         var r = new XMLHttpRequest();
-        var url = "/email-send";
+        var url = "/send-email";
         var nameuser = document.getElementById('name').value;
         var email = document.getElementById('email').value;
         var message = document.getElementById('message').value;
@@ -175,6 +175,7 @@
 
         button.value = "Sending...";
         r.open("POST", url, true);
+
         r.setRequestHeader("Content-Type", "application/json");
 
         r.onreadystatechange = function () {
@@ -184,30 +185,34 @@
                     if (response.success) {
                         document.getElementById('response-message').innerText = "Email sent";
                         button.value = "Sent";
-
                     } else {
                         console.error("Failed to send email.");
                         document.getElementById('response-message').innerText = "Error, email not sent";
-
                     }
                 } else {
                     document.getElementById('response-message').innerText = "Error occurred while sending email: " + r.statusText;
-
                 }
             }
         };
 
-        var formData = {
+
+        var requestBody = JSON.stringify({
             name: nameuser,
             email: email,
             message: message
-        };
+        });
 
-        r.send(JSON.stringify(formData));
+        r.send(requestBody);
     }
 
-    document.getElementById('contactMail').addEventListener('submit', sendEmail);
+    document.getElementById('contactMail').addEventListener('submit', function(event) {
+        event.preventDefault();
+        sendEmail();
+    });
+
 </script>
+
+
 <script src="/js/jquery.min.js"></script>
 <script src="/js/bootstrap.min.js"></script>
 <script src="/js/jquery.isotope.min.js"></script>
