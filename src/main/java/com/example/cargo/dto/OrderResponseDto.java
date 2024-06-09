@@ -18,15 +18,9 @@ import java.time.LocalDateTime;
 @Builder
 public class OrderResponseDto {
     private long id;
-    private LocalDateTime sendDate;
-    private LocalDateTime deliveredDate;
+    private String cityFrom;
+    private String cityTo;
+    private String parcelSize;
     private double price;
-    private double priceUSD;
-    private OrderStatus orderStatus;
-    private String orderLocation;
-    private Transport transportType;
-    private User user;
-    private Payment payment;
-    private Product product;
 
 }

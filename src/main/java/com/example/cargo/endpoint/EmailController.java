@@ -11,7 +11,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 @RestController
-
 public class EmailController {
     private final EmailService emailService;
     private static final Logger log = LoggerFactory.getLogger(EmailController.class);
@@ -20,7 +19,7 @@ public class EmailController {
         this.emailService = emailService;
     }
 
-    @PostMapping("/email-send")
+    @PostMapping("/send-email")
     public Map<String, Boolean> sendEmail(@RequestBody Map<String, String> request) {
         Map<String, Boolean> response = new HashMap<>();
         try {

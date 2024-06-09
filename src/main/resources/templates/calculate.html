@@ -62,7 +62,7 @@
             </div>
 
             <section id="section-quick-quote">
-                <h3 class="price">Price: $ <span th:text="${totalPrice}"></span></h3>
+                <h3 class="price">Price: $ <span id="dynamicPrice" th:text="${totalPrice}"></span></h3>
                 <div class="row form-transparent">
                     <div class="col-md-12 wow fadeInDown">
                         <div class="text-label bg-color text-center light-text">
@@ -76,7 +76,7 @@
                             <select id="city-from" name="cityFrom">
                                 <option>Select from</option>
                                 <option style="color: black" value="40.7942,43.8453">Yerevan, Armenia</option>
-                                <option style="color: black" value="40.7900,43.8492">Aremnia,Gyumri</option>
+                                <option style="color: black" value="40.7900,43.8492">Armenia, Gyumri</option>
                                 <option style="color: black" value="55.7558,37.6176">Moscow</option>
                                 <option style="color: black" value="48.8566,2.3522">Paris</option>
                                 <option style="color: black" value="52.5200,13.4050">Berlin</option>
@@ -87,7 +87,7 @@
                             <select id="city-to" name="cityTo">
                                 <option>Select to</option>
                                 <option style="color: black" value="40.7942,43.8453">Yerevan, Armenia</option>
-                                <option style="color: black" value="40.7900,43.8492">Aremnia,Gyumri</option>
+                                <option style="color: black" value="40.7900,43.8492">Armenia, Gyumri</option>
                                 <option style="color: black" value="55.7558,37.6176">Moscow</option>
                                 <option style="color: black" value="48.8566,2.3522">Paris</option>
                                 <option style="color: black" value="52.5200,13.4050">Berlin</option>
@@ -105,7 +105,7 @@
                         <div class="col-md-9">
                             <input class="col-md-9" type="submit" value="Calculate Distance" style="border: none"/>
                             <input th:if="${currentUser != null}" class="col-md-9" type="submit" value="Order"
-                                   style="background-color: #0c79e3;color: white;border: none"/>
+                                   style="background-color: #0c79e3;color: white;border: none" onclick="saveOrder()"/>
                         </div>
                     </form>
                     <div id="distance-result"></div>
@@ -113,8 +113,6 @@
                     <input type="hidden" name="lon1" id="lon1"/>
                     <input type="hidden" name="lat2" id="lat2"/>
                     <input type="hidden" name="lon2" id="lon2"/>
-
-
                 </div>
             </section>
 
@@ -138,141 +136,184 @@
 
 <script>
     document.addEventListener("DOMContentLoaded", function () {
-        let selectElement = document.getElementById("citySend");
-
-        selectElement.addEventListener("change", function () {
-            selectElement.options[selectElement.selectedIndex].text;
-        });
-    });
-
-    document.addEventListener("DOMContentLoaded", function () {
-        let selectElement = document.getElementById("cityDelivery");
-
-        selectElement.addEventListener("change", function () {
-            selectElement.options[selectElement.selectedIndex].text;
-        });
-    });
-    document.getElementById('distance-form').addEventListener('submit', function (event) {
-        event.preventDefault();
-
-        let cityFrom = document.getElementById('city-from').value;
-        let cityTo = document.getElementById('city-to').value;
-        let parcelSize = document.getElementById('parcel-size').value;
-
-        if (cityFrom.trim() === '' || cityTo.trim() === '' || parcelSize.trim() === '') {
-            alert('Please fill in all fields.');
-        } else {
-            myGeolocator();
+        let selectElementCitySend = document.getElementById("citySend");
+        if (selectElementCitySend) {
+            selectElementCitySend.addEventListener("change", function () {
+                selectElementCitySend.options[selectElementCitySend.selectedIndex].text;
+            });
         }
-    });
 
-
-    function myGeolocator() {
-        if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(success, handleError);
-        } else {
-            result.innerHTML = "Geolocation is not supported by your browser.";
+        let selectElementCityDelivery = document.getElementById("cityDelivery");
+        if (selectElementCityDelivery) {
+            selectElementCityDelivery.addEventListener("change", function () {
+                selectElementCityDelivery.options[selectElementCityDelivery.selectedIndex].text;
+            });
         }
-    }
 
-    function success(data) {
-        console.log("Success function called");
-        let lat = data.coords.latitude;
-        let long = data.coords.longitude;
+        let distanceForm = document.getElementById('distance-form');
+        if (distanceForm) {
+            distanceForm.addEventListener('submit', function (event) {
+                event.preventDefault();
 
+                let cityFrom = document.getElementById('city-from').value;
+                let cityTo = document.getElementById('city-to').value;
+                let parcelSize = document.getElementById('parcel-size').value;
 
-        let selectedDestination = document.getElementById('city-to').value.split(',');
-        let lat1 = selectedDestination[0];
-        let long1 = selectedDestination[1];
+                if (cityFrom.trim() === '' || cityTo.trim() === '' || parcelSize.trim() === '') {
+                    alert('Please fill in all fields.');
+                } else {
+                    myGeolocator();
+                }
+            });
+        }
 
-        let selectedDeparture = document.getElementById('city-from').value.split(',');
-        let lat2 = selectedDeparture[0];
-        let long2 = selectedDeparture[1];
+        function myGeolocator() {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(success, handleError);
+            } else {
+                result.innerHTML = "Geolocation is not supported by your browser.";
+            }
+        }
 
-        document.getElementById('lat1').value = lat;
-        document.getElementById('lon1').value = long;
-        document.getElementById('lat2').value = lat2;
-        document.getElementById('lon2').value = long2;
+        function success(data) {
+            let lat = data.coords.latitude;
+            let long = data.coords.longitude;
 
-        document.getElementById('distance-form').submit();
-        console.log("Form submitted");
-    }
+            let selectedDestination = document.getElementById('city-to').value.split(',');
+            let lat1 = selectedDestination[0];
+            let long1 = selectedDestination[1];
 
+            let selectedDeparture = document.getElementById('city-from').value.split(',');
+            let lat2 = selectedDeparture[0];
+            let long2 = selectedDeparture[1];
 
-    function handleError(error) {
-        result.innerHTML = "Error getting geolocation: " + error.message;
-    }
+            document.getElementById('lat1').value = lat;
+            document.getElementById('lon1').value = long;
+            document.getElementById('lat2').value = lat2;
+            document.getElementById('lon2').value = long2;
 
-    document.addEventListener("DOMContentLoaded", function () {
+            localStorage.setItem("cityFrom", document.getElementById("city-from").value);
+            localStorage.setItem("cityTo", document.getElementById("city-to").value);
+            localStorage.setItem("parcelSize", document.getElementById("parcel-size").value);
+
+            document.getElementById('distance-form').submit();
+        }
+
+        function handleError(error) {
+            result.innerHTML = "Error getting geolocation: " + error.message;
+        }
 
         let savedParcelSize = localStorage.getItem("parcelSize");
         if (savedParcelSize) {
-            document.getElementById("parcelSize").value = savedParcelSize;
+            document.getElementById("parcel-size").value = savedParcelSize;
         }
 
         let savedCityFrom = localStorage.getItem("cityFrom");
         if (savedCityFrom) {
-            document.getElementById("cityFrom").value = savedCityFrom;
+            document.getElementById("city-from").value = savedCityFrom;
         }
 
         let savedCityTo = localStorage.getItem("cityTo");
         if (savedCityTo) {
-            document.getElementById("cityTo").value = savedCityTo;
+            document.getElementById("city-to").value = savedCityTo;
         }
 
         updatePrice();
-    });
 
-    function updatePrice() {
+        setStoredCities();
 
-        let formData = {
-            cityFrom: document.getElementById("cityFrom").value,
-            cityTo: document.getElementById("cityTo").value,
-            parcelSize: document.getElementById("parcelSize").value
-        };
+        document.getElementById('city-from').addEventListener('change', updatePrice);
+        document.getElementById('city-to').addEventListener('change', updatePrice);
+        document.getElementById('parcel-size').addEventListener('change', updatePrice);
 
-        localStorage.setItem("cityFrom", formData.cityFrom);
-        localStorage.setItem("cityTo", formData.cityTo);
+        document.getElementById('distance-form').addEventListener('submit', function (event) {
+            event.preventDefault();
+            saveOrder();
+        });
 
-        fetch('/calculate', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(formData)
-        })
-            .then(response => response.json())
-            .then(data => {
-
-                document.getElementById('dynamicPrice').innerText = '$' + Math.floor(data);
-            })
-            .catch(error => console.error('Error:', error));
-
-        return false;
-    }
-
-    function setStoredCities() {
-        let cityFrom = localStorage.getItem("cityFrom");
-        let cityTo = localStorage.getItem("cityTo");
-        if (cityFrom && cityTo) {
-            document.getElementById("cityFrom").value = cityFrom;
-            document.getElementById("cityTo").value = cityTo;
+        function setStoredCities() {
+            let cityFrom = localStorage.getItem("cityFrom");
+            let cityTo = localStorage.getItem("cityTo");
+            if (cityFrom && cityTo) {
+                document.getElementById("city-from").value = cityFrom;
+                document.getElementById("city-to").value = cityTo;
+            }
         }
-    }
 
-    document.addEventListener("DOMContentLoaded", setStoredCities);
+        function updatePrice() {
+            const formData = {
+                cityFrom: document.getElementById("city-from").value,
+                cityTo: document.getElementById("city-to").value,
+                parcelSize: document.getElementById("parcel-size").value
+            };
 
-    document.getElementById('cityFrom').addEventListener('change', updatePrice);
-    document.getElementById('cityTo').addEventListener('change', updatePrice);
-    document.getElementById('parcelSize').addEventListener('change', updatePrice);
+            localStorage.setItem("cityFrom", formData.cityFrom);
+            localStorage.setItem("cityTo", formData.cityTo);
 
-    updatePrice();
+            fetch('/calculate', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(formData)
+            })
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    if (isNaN(data)) {
+                        throw new Error('Received NaN value from server');
+                    }
+                    document.getElementById('dynamicPrice').innerText = '$' + Math.floor(data);
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
 
-    document.getElementById('calculateForm').addEventListener('submit', function (event) {
-        event.preventDefault();
-        calculatePrice();
+            return false;
+        }
+
+
+        function saveOrder() {
+            let orderData = {
+                cityFrom: document.getElementById("city-from").value,
+                cityTo: document.getElementById("city-to").value,
+                parcelSize: document.getElementById("parcel-size").value,
+                price: parseFloat(document.getElementById("price").value)
+            };
+
+            fetch('/api/orders/save', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(orderData)
+            })
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    if (typeof data !== 'number' || isNaN(data)) {
+                        throw new Error('Received invalid price value from server');
+                    }
+                    document.getElementById('dynamicPrice').innerText = '$' + Math.floor(data);
+                    console.log("Order saved: ", data);
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+        }
+
     });
+
 </script>
+
 
 <!-- LOAD JS FILES -->
 <script src="js/jquery.min.js"></script>
