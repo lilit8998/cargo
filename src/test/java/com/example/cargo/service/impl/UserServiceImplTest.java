@@ -36,7 +36,7 @@ class UserServiceImplTest {
         long userId = 1L;
         User user = new User();
         user.setId(userId);
-        when(userRepository.findById(userId)).thenReturn(user);
+        when(userRepository.findById(userId)).thenReturn(of(user));
 
         Optional<User> userFound = userService.findById(userId);
         assertTrue(userFound.isPresent());
