@@ -25,6 +25,7 @@ import java.util.UUID;
 @RequestMapping("/user")
 @Slf4j
 public class UserController {
+
     private final UserService userService;
 
     private final PasswordEncoder passwordEncoder;
@@ -43,6 +44,9 @@ public class UserController {
 
     @GetMapping("/account")
     public String userAccount(@AuthenticationPrincipal SpringUser user, Model model) {
+       if (user == null){
+           return "redirect:/login";
+       }
         model.addAttribute("user", user);
         return "user/account";
     }
@@ -101,7 +105,7 @@ public class UserController {
         if (springUser != null && springUser.getUser() != null) {
             User user = springUser.getUser();
             if (user.getUserRole() == UserRole.USER) {
-                return "redirect:/account";
+                return "redirect:/user/account";
             } else if (user.getUserRole() == UserRole.ADMIN) {
                 return "redirect:/admin/home";
             }
@@ -111,7 +115,7 @@ public class UserController {
 
     @GetMapping("/delete/{id}")
     public String deleteUser(@PathVariable("id") long id, Model model, HttpSession session) {
-        Optional<User> userOptional = Optional.ofNullable(userRepository.findById(id));
+        Optional<User> userOptional = userRepository.findById(id);
         if (userOptional.isPresent()) {
             User user = userOptional.get();
             userRepository.delete(user);
