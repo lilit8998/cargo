@@ -13,9 +13,9 @@ public interface OrderService {
 
     List<OrderResponseDto> getAll();
 
-    Product getByProduct(Long productId);
-
-    OrderResponseDto findOrdersById(Long id);
+//    Product getByProduct(Long productId);
+//
+//    OrderResponseDto findOrdersById(Long id);
 
     void deleteById(Long id);
 

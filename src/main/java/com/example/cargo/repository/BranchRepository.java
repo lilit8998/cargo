@@ -7,6 +7,12 @@ import java.util.Optional;
 
 public interface BranchRepository extends JpaRepository<Branch,Long> {
    Optional <Branch> findByEmail(String email);
+
+
+   boolean existsByUser_Id(Long userId);
+
+
+
 }
 
 
