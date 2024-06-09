@@ -12,8 +12,8 @@ import java.time.LocalDate;
 @Mapper(componentModel = "spring", nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE,
         imports = LocalDate.class)
 public interface NewsMapper {
-//    NewsResponseDto map(News news);
-//
-//    @Mapping(target = "SendDto", expression = "java(LocalDate.now())")
-//    News map(SaveNewsDto saveNewsDto);
+    NewsResponseDto map(News news);
+
+    @Mapping(target = "publishDate", expression = "java(LocalDate.now())")
+    News map(SaveNewsDto saveNewsDto);
 }

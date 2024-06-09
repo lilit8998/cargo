@@ -1,6 +1,5 @@
 package com.example.cargo.dto;
 
-import com.example.cargo.entity.Country;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -14,5 +13,5 @@ public class CityResponseDto {
 
     private long id;
     private String name;
-    private Country country;
+    private CountryResponseDto country;
 }

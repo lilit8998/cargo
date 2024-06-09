@@ -8,6 +8,40 @@
     <meta name="author" content="">
 
     <link href="/css/main.css" rel="stylesheet" type="text/css">
+    <style>
+        .pagination-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 20px;
+        }
+
+        .pagination-item {
+            border-radius: 10px;
+            display: inline-block;
+            padding: 5px 12px;
+            margin: 0 2px;
+            text-decoration: none;
+            color: #333;
+            background-color: #fff;
+            border: 1px solid #ccc;
+            transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+            width: 35px;
+            text-align: center;
+        }
+
+        .pagination-item:hover {
+            background-color: #f5f5f5;
+            color: #333;
+            border-color: #ccc;
+        }
+
+        .pagination-item.active {
+            background-color: blue;
+            color: #fff;
+            border-color: #5c7a97;
+        }
+    </style>
 </head>
 
 <body>
@@ -55,135 +89,33 @@
             <div class="row">
                 <div class="col-md-8">
 
-                    <div id="newslist" class="news-list">
+                    <div th:each="news : ${newsList}" id="news-list" class="news-list">
+
                         <div class="col-md-6 news-item item">
-                            <img src="img/news/pic%20%281%29.jpg" class="img-responsive" alt="">
+                            <img th:src="@{/getImage(picName=${news.picName})}" class="img-responsive" alt="">
                             <div class="desc">
                                 <a href="#">
-                                    <h3>We Opening New Branch on Brooklyn</h3>
+                                    <h3 th:text="${news.title}">We Opening New Branch on Brooklyn</h3>
                                 </a>
-                                <div class="post-details">Dec 23, 14 <span class="separator">|</span><i
+                                <div  th:text="${#dates.format(news.publishDate, 'dd:HH:mm')}" class="post-details">Dec 23, 14 <span class="separator">|</span><i
                                         class="fa fa-picture-o"></i><span class="separator">|</span>By: <a href='#'>Admin</a>
                                 </div>
+                                <div th:text="${news.description}">
                                 Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
-                                incididunt ut labore et dolore magna aliqua.
-                                <br>
+                                incididunt ut labore et dolore magna aliqua.</div>
                             </div>
                         </div>
 
-                        <div class="col-md-6 news-item item">
-                            <img src="img/news/pic%20%282%29.jpg" class="img-responsive" alt="">
-                            <div class="desc">
-                                <a href="#">
-                                    <h3>Estimate Cost For Your Shipment</h3>
-                                </a>
-                                <div class="post-details">Dec 23, 14 <span class="separator">|</span><i
-                                        class="fa fa-picture-o"></i><span class="separator">|</span>By: <a href='#'>Admin</a>
-                                </div>
-                                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
-                                incididunt ut labore et dolore magna aliqua.
-                            </div>
-                        </div>
-
-
-                        <div class="col-md-6 news-item item">
-                            <img src="img/news/pic%20%283%29.jpg" class="img-responsive" alt="">
-                            <div class="desc">
-                                <a href="#">
-                                    <h3>Tracking Apps For Mobile Phone</h3>
-                                </a>
-                                <div class="post-details">Dec 23, 14 <span class="separator">|</span><i
-                                        class="fa fa-picture-o"></i><span class="separator">|</span>By: <a href='#'>Admin</a>
-                                </div>
-                                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
-                                incididunt ut labore et dolore magna aliqua.
-                            </div>
-                        </div>
-
-                        <div class="col-md-6 news-item item">
-                            <img src="img/news/pic%20%284%29.jpg" class="img-responsive" alt="">
-                            <div class="desc">
-                                <a href="#">
-                                    <h3>We Opening New Branch on Brooklyn</h3>
-                                </a>
-                                <div class="post-details">Dec 23, 14 <span class="separator">|</span><i
-                                        class="fa fa-picture-o"></i><span class="separator">|</span>By: <a href='#'>Admin</a>
-                                </div>
-                                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
-                                incididunt ut labore et dolore magna aliqua.
-                            </div>
-                        </div>
-
-                        <div class="col-md-6 news-item item">
-                            <iframe width="560" height="315" src="http://www.youtube.com/embed/0gv7OC9L2s8"
-                                    allowfullscreen=""></iframe>
-                            <div class="desc">
-                                <a href="#">
-                                    <h3>Youtube Video</h3>
-                                </a>
-                                <div class="post-details">Dec 23, 14 <span class="separator">|</span><i
-                                        class="fa fa-film"></i><span class="separator">|</span>By: <a href='#'>Admin</a>
-                                </div>
-                                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
-                                incididunt ut labore et dolore magna aliqua.
-                            </div>
-                        </div>
-
-                        <div class="col-md-6 news-item item">
-                            <img src="img/news/pic%20%285%29.jpg" class="img-responsive" alt="">
-                            <div class="desc">
-                                <a href="#">
-                                    <h3>Estimate Cost For Your Shipment</h3>
-                                </a>
-                                <div class="post-details">Dec 23, 14 <span class="separator">|</span><i
-                                        class="fa fa-picture-o"></i><span class="separator">|</span>By: <a href='#'>Admin</a>
-                                </div>
-                                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
-                                incididunt ut labore et dolore magna aliqua.
-                            </div>
-                        </div>
-
-                        <div class="col-md-6 news-item item">
-                            <div class="quote">
-                                Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque
-                                laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore.
-                            </div>
-                            <div class="desc">
-                                <a href="#">
-                                    <h3>Quote Post</h3>
-                                </a>
-                                <div class="post-details">Dec 23, 14 <span class="separator">|</span><i
-                                        class="fa fa-quote-right"></i><span class="separator">|</span>By: <a href='#'>Admin</a>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-md-6 news-item item">
-                            <div class="desc">
-                                <a href="#">
-                                    <h3>Text Only</h3>
-                                </a>
-                                <div class="post-details">Dec 23, 14 <span class="separator">|</span><i
-                                        class="fa fa-pencil"></i><span class="separator">|</span>By: <a
-                                        href='#'>Admin</a></div>
-                                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
-                                incididunt ut labore et dolore magna aliqua.
-                            </div>
-                        </div>
                     </div>
 
                     <div class="clearfix"></div>
-
-                    <div class="text-center ">
-                        <ul class="pagination">
-                            <li><a href="#">Prev</a></li>
-                            <li class="active"><a href="#">1</a></li>
-                            <li><a href="#">2</a></li>
-                            <li><a href="#">3</a></li>
-                            <li><a href="#">4</a></li>
-                            <li><a href="#">5</a></li>
-                            <li><a href="#">Next</a></li>
-                        </ul>
+                    <div class="pagination-container">
+                        <div th:if="${newsList.totalPages > 0}" class="btn btn-white" th:each="pageNumber : ${pageNumbers}">
+                            <a th:href="@{/news(size=${newsList.size}, page=${pageNumber})}"
+                               th:text="${pageNumber}"
+                               th:classappend="${pageNumber == newsList.number + 1} ? 'active' : ''"
+                               class="pagination-item"></a>
+                        </div>
                     </div>
 
                 </div>

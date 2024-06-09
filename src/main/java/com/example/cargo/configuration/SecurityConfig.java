@@ -35,8 +35,15 @@ public class SecurityConfig {
                         .requestMatchers("/about").permitAll()
                         .requestMatchers("/calculate").permitAll()
                         .requestMatchers("/contact").permitAll()
+                        .requestMatchers("/admin/adminHome").permitAll()
+                        .requestMatchers("/registrationBranch").permitAll()
+                        .requestMatchers("/loginBranch").permitAll()
+                        .requestMatchers("/getImage").permitAll()
                         .anyRequest().permitAll())
                 .formLogin(customizer -> customizer
+                        .loginProcessingUrl("/login")
+                        .loginProcessingUrl("/loginBranch")
+                        .loginPage("/loginBranch").permitAll()
                         .loginPage("/user/loginPage")
                         .loginProcessingUrl("/login")
                         .defaultSuccessUrl("/user/account"))
@@ -52,6 +59,5 @@ public class SecurityConfig {
         authenticationProvider.setPasswordEncoder(passwordEncoder);
         return authenticationProvider;
     }
-
 
 }

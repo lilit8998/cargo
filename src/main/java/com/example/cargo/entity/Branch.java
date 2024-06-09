@@ -21,5 +21,9 @@ public class Branch {
     private String street;
 
     @ManyToOne
-    private Orders orders;
+    private Orders order;
+
+    private String email;
+
+    private String password;
 }
