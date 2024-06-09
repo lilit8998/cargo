@@ -3,7 +3,6 @@ package com.example.cargo.service.impl;
 import com.example.cargo.dto.OrderResponseDto;
 import com.example.cargo.dto.SaveOrderDto;
 import com.example.cargo.entity.Orders;
-import com.example.cargo.entity.Product;
 import com.example.cargo.mapper.OrderMapper;
 import com.example.cargo.repository.OrderRepository;
 import com.example.cargo.service.OrderService;
@@ -27,10 +26,10 @@ public class OrderServiceImpl implements OrderService {
     @Override
     @Transactional(propagation = Propagation.REQUIRED, isolation = Isolation.SERIALIZABLE)
     public OrderResponseDto save(SaveOrderDto saveOrderDto) {
-       log.info("Saving Order {}",saveOrderDto);
+        log.info("Saving Order {}", saveOrderDto);
         Orders orders = orderMapper.map(saveOrderDto);
         Orders savedOrder = orderRepository.save(orders);
-        log.info("Saved Order with ID {}",savedOrder.getId());
+        log.info("Saved Order with ID {}", savedOrder.getId());
         return orderMapper.map(savedOrder);
     }
 
@@ -42,14 +41,6 @@ public class OrderServiceImpl implements OrderService {
             orderResponseDto.add(orderMapper.map(orders));
         }
         return orderResponseDto;
-    }
-
-    public OrderResponseDto findOrdersById(Long id) {
-        Orders orders = orderRepository.findById(id).orElse(null);
-        if (orders == null) {
-            return null;
-        }
-        return orderMapper.map(orders);
     }
 
     @Override
