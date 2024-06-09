@@ -97,7 +97,7 @@
                                 <a href="#">
                                     <h3 th:text="${news.title}">We Opening New Branch on Brooklyn</h3>
                                 </a>
-                                <div  th:text="${#dates.format(news.publishDate, 'dd:HH:mm')}" class="post-details">Dec 23, 14 <span class="separator">|</span><i
+                                <div  th:text="${#temporals.format(news.publishDate, 'dd:HH:mm')}" class="post-details">Dec 23, 14 <span class="separator">|</span><i
                                         class="fa fa-picture-o"></i><span class="separator">|</span>By: <a href='#'>Admin</a>
                                 </div>
                                 <div th:text="${news.description}">

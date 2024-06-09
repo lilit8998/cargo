@@ -3,7 +3,7 @@ package com.example.cargo.entity;
 import jakarta.persistence.*;
 import lombok.Data;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 @Entity
 @Table(name = "news")
@@ -15,7 +15,7 @@ public class News {
     private Long id;
     private String title;
     private String description;
-    private Date publishDate;
+    private LocalDate publishDate;
     private String picName;
 
 }

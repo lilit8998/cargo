@@ -12,6 +12,9 @@ public interface ProductService {
 
     void deleteById(int id);
 
-   // ProductEntity findProductByUser(Long id);
+    List<Product> getReceivedProducts();
+
+    List<Product> getReleasedProducts();
+
 
 }

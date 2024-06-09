@@ -4,12 +4,15 @@ import com.example.cargo.dto.BranchSaveDto;
 import com.example.cargo.entity.Branch;
 import com.example.cargo.entity.City;
 import com.example.cargo.entity.Country;
+import com.example.cargo.entity.User;
 import com.example.cargo.mapper.BranchMapper;
 import com.example.cargo.repository.BranchRepository;
 import com.example.cargo.repository.CityRepository;
 import com.example.cargo.repository.CountryRepository;
+import com.example.cargo.repository.UserRepository;
 import com.example.cargo.service.BranchService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -35,4 +38,9 @@ public class BranchServiceImp implements BranchService {
     }
 
 
+    @Override
+    public boolean existsByUserId(Long id) {
+            String username = SecurityContextHolder.getContext().getAuthentication().getName();
+            return branchRepository.existsByUser_Id(id);
+    }
 }

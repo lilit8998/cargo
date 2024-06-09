@@ -3,7 +3,6 @@ package com.example.cargo.entity;
 import jakarta.persistence.*;
 import lombok.Data;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Entity
@@ -15,17 +14,11 @@ public class Product {
     private Long id;
 
     private String details;
+    private int receivedId;
 
-    @ManyToOne
-    private User createdBy;
-
-    @Temporal(TemporalType.TIMESTAMP)
     private LocalDateTime orderDate;
 
     @OneToOne
-    @JoinColumn(name = "size_id")
     private Size size;
 
-    @OneToOne(mappedBy = "product")
-    private Orders orders;
 }
